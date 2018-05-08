@@ -1,0 +1,225 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/DashBoardcss.css" rel="stylesheet" />
+<link href="~/themify-icons/themify-icons.css" rel="stylesheet" />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="row">
+    <div class="col-lg-3 col-sm-6">
+        <a href="@Url.Action("Index","Users")">
+            <div class="card">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <div class="icon-big icon-success text-center">
+                                <i class="ti-face-smile"></i>
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="numbers">
+
+                                Users
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <hr>
+                        <div class="stats">
+                            <i class="ti-reload"></i> User Management
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <a href="@Url.Action("Index","ContactForm")">
+            <div class="card">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <div class="icon-big icon-success text-center">
+                                <i class="ti-email"></i>
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="numbers">
+                                Contact
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <hr>
+                        <div class="stats">
+                            <i class="ti-calendar"></i> Contact Details
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <a href="@Url.Action("Index","CMS")">
+            <div class="card">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <div class="icon-big icon-danger text-center">
+                                <i class="ti-shift-right-alt"></i>
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="numbers">
+                                CMS
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <hr>
+                        <div class="stats">
+                            <i class="ti-timer"></i> CMS Management
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <a href="@Url.Action("Index","CMSDetails")">
+            <div class="card">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <div class="icon-big icon-info text-center">
+                                <i class="ti-shift-right-alt"></i>
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="numbers">
+                                CMSDetails
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <hr>
+                        <div class="stats">
+                            <i class="ti-reload"></i> CMSDetails Management
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <a href="@Url.Action("Index","HtmlTypes")">
+            <div class="card">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <div class="icon-big icon-info text-center">
+                                <i class="ti-file"></i>
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="numbers">
+                                HtmlTypes
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <hr>
+                        <div class="stats">
+                            <i class="ti-reload"></i>HtmlTypes Management
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <a href="@Url.Action("Index","MenuItems")">
+            <div class="card">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <div class="icon-big icon-info text-center">
+                                <i class="ti-menu-alt"></i>
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="numbers">
+                                MenuItems
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <hr>
+                        <div class="stats">
+                            <i class="ti-reload"></i> MenuItems Management
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <a href="@Url.Action("Index","NewsletterUsers")">
+            <div class="card">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <div class="icon-big icon-info text-center">
+                                <i class="ti-email"></i>
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="numbers">
+                                Newsletter
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <hr>
+                        <div class="stats">
+                            <i class="ti-reload"></i> Newsletter Management
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <a href="@Url.Action("Index","Scripts")">
+            <div class="card">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <div class="icon-big icon-info text-center">
+                                <i class="ti-receipt"></i>
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="numbers">
+                                Scripts
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <hr>
+                        <div class="stats">
+                            <i class="ti-reload"></i> Scripts Management
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

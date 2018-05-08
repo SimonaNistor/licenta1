@@ -1,0 +1,132 @@
+﻿@model LandingPage.Models.CMSDetailsViewModels.CMSDetailsViewModels
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var title = Model.Id > 0 ? "Editare" : "Creare";
+}
+
+<head>
+
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+</head>
+<h2>Create</h2>
+
+<h4>CMSDetailsViewModels</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data" asp-controller="CMSDetails">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            @*<div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="CMSId" class="control-label"></label>
+                <select asp-for="CMSId" class="form-control" asp-items="ViewBag.CMSId"></select>
+                <span asp-validation-for="CMSId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderIndex" class="control-label"></label>
+                <input asp-for="OrderIndex" class="form-control" />
+                <span asp-validation-for="OrderIndex" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HtmlTypeId" class="control-label"></label>
+                <select asp-for="HtmlTypeId" class="form-control" id="HtmlTypeDDL" asp-items="ViewBag.HtmlTypeId"></select>
+                <span asp-validation-for="HtmlTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Content" class="control-label"></label>
+                <input asp-for="Content" id="ContentId" name="ContentId" class="form-control" />
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <textarea rows="4" cols="50" id="TextAreaId" name="TextAreaId" asp-for="TextAreaId">
+            </textarea>
+
+            </div>
+            <div class="form-group">
+                <textarea id="HtmlEditorId" name="HtmlEditorId" asp-for="HtmlEditorId">
+            </textarea>
+            </div>
+            <div class="form-group">
+                <img width="200" src="@Model.Content" alt="">
+                <input type="file" name="FileUploadId" id="FileUploadId" asp-for="FileUploadId" />
+            </div>
+            <div class="form-group">
+                <input type="submit"  value="@title" class="btn btn-default" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script src="~/js/jquery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function () {
+
+
+     CompleteValues();
+
+    $("#HtmlTypeDDL").change(function () {
+        CompleteValues();
+
+            });
+
+
+    });
+
+    function CompleteValues() {
+        var HtmlTypeDDV = $("#HtmlTypeDDL").val();
+        if (HtmlTypeDDV == 1) {
+            $("#ContentId").show();
+            $("#TextAreaId").hide();
+            $("#HtmlEditorId").parent().hide();
+            $("#FileUploadId").hide();
+
+        }
+        if (HtmlTypeDDV == 2) {
+            $("#ContentId").hide();
+            $("#HtmlEditorId").parent().hide();
+            $("#FileUploadId").hide();
+            $("#TextAreaId").show();
+            $("#ContentId").val($("#TextAreaId").val());
+        }
+        if (HtmlTypeDDV == 3) {
+            tinymce.init({ selector: 'textarea#HtmlEditorId' });
+            $("#ContentId").hide();
+            $("#TextAreaId").hide();
+            $("#FileUploadId").hide();
+            $("#HtmlEditorId").parent().show();
+
+            //tinymce.init({ selector: 'textarea' });
+
+        }
+        if (HtmlTypeDDV == 4) {
+            $("#ContentId").hide();
+            $("#TextAreaId").hide();
+            $("#HtmlEditorId").parent().hide();
+            $("#FileUploadId").show();
+        }
+
+    }
+
+</script>

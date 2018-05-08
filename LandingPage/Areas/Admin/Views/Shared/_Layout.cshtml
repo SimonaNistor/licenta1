@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>xCode - App Landing Page</title>
+    <link rel="shortcut icon" href="~/img/favicon.ico" type="image/x-icon">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Animate CSS -->
+    <link href="~/css/animate.css" rel="stylesheet" />
+    <!-- jquery carousel-3d default CSS -->
+    <link href="~/css/jquery.carousel-3d.default.css" rel="stylesheet" />
+    <!-- font-awesome-->
+    <link href="~/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Et-line-->
+    <link href="~/css/etline.css" rel="stylesheet" />
+    <!-- owl carousel -->
+    <link href="~/css/owl.carousel.min.css" rel="stylesheet" />
+    <!-- YTPlayer -->
+    <link href="~/css/YTPlayer.css" rel="stylesheet" />
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700,800" rel="stylesheet">
+    <!-- Main CSS -->
+    <link href="~/css/style.css" rel="stylesheet" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+</head>
+
+<body id="page-top">
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="line_button">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </span><!--end line button-->
+                        </button>
+                        <div class="logo">
+                            <a href="/"><img src="~/img/1.png" alt="Logo"></a>
+                        </div>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="navbar-collapse collapse" id="navbar">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="/"><span>Home</span></a></li>
+                            <li>@{Html.RenderPartial("_LoginPartial"); }</li>
+
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+    </nav>
+    <!-- end nav -->
+
+
+    <section class="section-spacing align-users">
+
+
+        @RenderBody()
+    </section>
+        <footer id="footer">
+            <div class="container">
+                <div class="col-xs-12">
+                    <div class="copyright text-center">
+                        <p>&copy; copyright 2018 | All right reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+</body>
+
+</html>
+
+@RenderSection("scripts", false)
+
+
+

@@ -1,0 +1,92 @@
+﻿
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+    <h2 class="page-title">Index</h2>
+
+    <a href="@Url.Action("Create","MenuItems")"> Adauga item </a>
+
+
+    <link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <div class="datatable">
+        <table id="datatable" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>ItemId</th>
+                    <th>Name</th>
+                    <th>OrderIndex</th>
+                    <th>Section</th>
+                    <th>IsVisible</th>
+                    <th>Delete</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>ItemId</th>
+                    <th>Name</th>
+                    <th>OrderIndex</th>
+                    <th>Section</th>
+                    <th>IsVisible</th>
+                    <th>Delete</th>
+                    <th>Edit</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+    function reload() {
+        $('#datatable').DataTable({
+            ajax: "@Url.Action("GetAll","MenuItems")",
+            columns: [
+                { data: "itemId" },
+                { data: "name" },
+                { data: "orderIndex" },
+                { data: "section" },
+                { data: "isVisible"},
+                {
+                    data: "itemId", render: function (data, type, row, meta) {
+                        data = '<input value="Stergere" type="Button" onclick="deleteItem(\'' + data + '\')" />';
+
+                        return data;
+                    }
+                },
+                {
+                    data: "itemId", render: function (data, type, row, meta) {
+                        var link = '/admin/menuitem/createItem?id=' + data;
+                        data = '<a href="' + link + '">Edit</a>';                  
+                        return data;
+                    }
+                }
+            ]
+        });
+    }
+
+     function deleteItem(data) {
+        $.ajax({
+            url: '@Url.Action("DeleteItem","ContactForm")',
+            data: { ItemId: data}
+        }).success(function (response) {
+            if (response == true) {
+                $('#datatable').DataTable().ajax.reload();    
+            }
+            else { alert("Nu s-a putut sterge itemul");}
+
+        })
+
+    }
+
+    $(document).ready(function () {
+        reload();
+    });
+
+
+
+    </script>

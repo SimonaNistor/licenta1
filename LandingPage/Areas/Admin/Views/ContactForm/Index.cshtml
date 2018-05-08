@@ -1,0 +1,75 @@
+﻿
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="page-title">Index</h2>
+
+<link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<div class="datatable">
+    <table id="datatable" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>EmailAddress</th>
+                <th>Message</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>EmailAddress</th>
+                <th>Message</th>
+                <th>Delete</th>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" type="text/javascript"></script>
+
+<script>
+    function reload() {
+        $("#datatable").DataTable({
+            ajax: "@Url.Action("GetAll","ContactForm")",
+            columns:
+                [
+                    { data: "id" },
+                    { data: "firstName" },
+                    { data: "lastName" },
+                    { data: "emailAddress" },
+                    { data: "message" },
+                    {
+                        data: "id", render: function (data, type, row, meta) {
+                            data = '<input value="Stergere" type="Button" onclick="deleteItem(\'' + data + '\')" />';
+                            return data;
+                        }
+                    }
+                ]
+        })
+    }
+
+    function deleteItem(data) {
+        $.ajax({
+            url: '@Url.Action("DeleteItem","ContactForm")',
+            data: { ItemId: data}
+        }).success(function (response) {
+            if (response == true) {
+                $('#datatable').DataTable().ajax.reload();
+            }
+            else { alert("Nu s-a putut sterge");}
+        })
+
+    }
+
+    $(document).ready(function () {
+        reload();
+    });
+</script>
