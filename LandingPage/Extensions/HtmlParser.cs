@@ -1,4 +1,6 @@
 ﻿using HtmlAgilityPack;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.NodeServices;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -31,16 +33,23 @@ namespace LandingPage.Extensions
             List<string> result = new List<string>();
 
             StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder2 = new StringBuilder();
             for (int i=0;i<count;i++)
             {
                 if (code[i].ToString() == "pre class=\"prettyprint notranslate\"")
                 {
                     x = code[i+1].ToString();
-                    string[] y = x.Split(';');
+                    string[] y= x.Split("&#xA;");
                     foreach (string s in y)
                     {
-                        stringBuilder.AppendLine("\n" + s.ToString());
+                        stringBuilder.AppendLine(s.ToString());
                     }
+                    string p = stringBuilder.ToString();
+                    //y = p.Split("&#xA;");
+                    //foreach (string s in y)
+                    //{
+                    //    stringBuilder2.AppendLine(s.ToString());
+                    //}
                     result.Add(stringBuilder.ToString());
                 }
             }
@@ -69,7 +78,5 @@ namespace LandingPage.Extensions
             
             return result[0];// webData;
         }
-        
-        
     }
 }

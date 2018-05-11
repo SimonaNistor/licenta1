@@ -56,6 +56,7 @@ namespace test
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc();
+            services.AddNodeServices();
 
             // requires: using Microsoft.AspNetCore.Authorization;
             //           using Microsoft.AspNetCore.Mvc.Authorization;
@@ -66,7 +67,7 @@ namespace test
             //                     .Build();
             //    config.Filters.Add(new AuthorizeFilter(policy));
             //});
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
