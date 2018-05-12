@@ -14,7 +14,7 @@ namespace LandingPage.Extensions
 {
     public class HtmlParser
     {
-        public static string Nou()
+        public static string Nou(string keyword)
         {
             System.Net.WebClient wc = new System.Net.WebClient();
             byte[] raw = wc.DownloadData("https://www.tutorialspoint.com/cplusplus/cpp_constructor_destructor.htm");
@@ -31,52 +31,50 @@ namespace LandingPage.Extensions
             }
             string x = "empty";
             List<string> result = new List<string>();
-
             StringBuilder stringBuilder = new StringBuilder();
-            StringBuilder stringBuilder2 = new StringBuilder();
             for (int i=0;i<count;i++)
             {
                 if (code[i].ToString() == "pre class=\"prettyprint notranslate\"")
                 {
                     x = code[i+1].ToString();
-                    string[] y= x.Split("&#xA;");
-                    foreach (string s in y)
-                    {
-                        stringBuilder.AppendLine(s.ToString());
-                    }
-                    string p = stringBuilder.ToString();
-                    //y = p.Split("&#xA;");
-                    //foreach (string s in y)
-                    //{
-                    //    stringBuilder2.AppendLine(s.ToString());
-                    //}
-                    result.Add(stringBuilder.ToString());
+                    x = replaceAll(x);
+                    result.Add(x.ToString());
                 }
             }
-            
+
+            return selectBestSnippet(result, keyword);//result[2];
+        }
 
 
 
-            ///////////////////////////////////////////////////////////////// ^merge
+        public static string replaceAll(string x)
+        {
+            x = x.Replace("&lt;&lt;", "<<");
+            x = x.Replace("&lt;", "<");
+            x = x.Replace("&gt;&gt;", ">>");
+            x = x.Replace("&gt;", ">");
+            x = x.Replace("&amp;&amp;", "&&");
+            return x;
+        }
 
-            string html;
-            using (var client = new WebClient())
+        public static string selectBestSnippet(List<string> code, string keyword)
+        {
+            int counter = 0;
+            foreach(string s in code)
             {
-                html = client.DownloadString("https://www.tutorialspoint.com/cplusplus/cpp_constructor_destructor.htm");
+                counter++;
             }
-            
-            HtmlDocument doc = new HtmlDocument();
-            doc.LoadHtml(html);
-            StringBuilder sb = new StringBuilder();
-            //string head = doc.DocumentNode.SelectNodes("//[@class='question-hiperlink']").ToString();
-
-            foreach (HtmlTextNode node in doc.DocumentNode.SelectNodes("//text()"))
+            List<int> values = new List<int>();
+            for(int i=0;i<counter;i++)
             {
-                sb.AppendLine(node.Text);
+                values.Add(KeywordsDetect.detect(code[i], keyword));
             }
-            string final = sb.ToString();
-            
-            return result[0];// webData;
+            int maxValue = values.Max();
+            int maxIndex = values.IndexOf(maxValue);
+            //var result = values.OrderByDescending(w => w).Take(3);
+            //List<int> results = result.ToList();
+            //return code[results[1]];
+            return code[maxIndex];
         }
     }
 }
