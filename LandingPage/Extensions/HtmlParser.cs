@@ -16,11 +16,18 @@ namespace LandingPage.Extensions
     {
         public static string Nou(string keyword)
         {
+            List<string> rezultateCautare = cautare();
+
+            return selectBestSnippet(rezultateCautare, keyword);
+        }
+
+        public static List<string> cautare()
+        {
             System.Net.WebClient wc = new System.Net.WebClient();
             byte[] raw = wc.DownloadData("https://www.tutorialspoint.com/cplusplus/cpp_constructor_destructor.htm");
 
             string webData = System.Text.Encoding.UTF8.GetString(raw);
-            char[] delimiterChars = { '<','>'};
+            char[] delimiterChars = { '<', '>' };
             string[] code = webData.Split(delimiterChars);
             StringBuilder ceva = new StringBuilder();
             int count = 0;
@@ -32,20 +39,17 @@ namespace LandingPage.Extensions
             string x = "empty";
             List<string> result = new List<string>();
             StringBuilder stringBuilder = new StringBuilder();
-            for (int i=0;i<count;i++)
+            for (int i = 0; i < count; i++)
             {
                 if (code[i].ToString() == "pre class=\"prettyprint notranslate\"")
                 {
-                    x = code[i+1].ToString();
+                    x = code[i + 1].ToString();
                     x = replaceAll(x);
                     result.Add(x.ToString());
                 }
             }
-
-            return selectBestSnippet(result, keyword);//result[2];
+            return result;
         }
-
-
 
         public static string replaceAll(string x)
         {
@@ -54,6 +58,7 @@ namespace LandingPage.Extensions
             x = x.Replace("&gt;&gt;", ">>");
             x = x.Replace("&gt;", ">");
             x = x.Replace("&amp;&amp;", "&&");
+            x = x.Replace("&amp;", "&");
             return x;
         }
 

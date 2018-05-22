@@ -29,36 +29,49 @@
 
 <div id="home" class="banner" style="">
     <div class="overlay"></div>
-    <div class="curve"></div>
+    @*<div class="curve"></div>*@
     <div class="banner-caption">
+
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-sm-6">
-                    <div class="caption-inner text-left">
-                        @*<h1 class="animated fadeInUp">@HtmlHelperForView.ViewHelper(Model, 36, "HeaderDescription")</h1>
-                            <p class="animated fadeInUp">@HtmlHelperForView.ViewHelper(Model, 36, "HeaderSubtitle")</p>*@
-                    </div>
+                <div class="caption-inner text-center wow fadeInUp">
+                    <h1>INSTRUMENT PENTRU AUTOMATIZAREA CREARII DE SOFTWARE</h1>
                 </div>
-                <div class="col-xs-12 col-sm-6 hidden-xs">
-                    <div class="caption-thumb text-right animated fadeInUp">
-                        @*<img src="@HtmlHelperForView.ViewHelper(Model, 36, "Img")" alt="Img">*@
-                    </div>
-                </div>
+                <div class="caption-inner text-center wow fadeInUp"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+                    <div class="subscribe-content text-center">
+                        <form action="#" method="post" id="newsletterForm">
+                            <div class="input-group">
+                                <input type="email" class="form-control ui email" id="newsletterUser" placeholder="Keyword1@Keyword2" required data-error="Please enter your valid email address" name="newsletterUser" />
+                                <div class="help-block with-errors"></div>
+                                <span class="input-group-addon">
+                                    <input class="btn btn-primary" value="SEARCH" onclick="createUser()">
 
+                                </span>
+
+                            </div>
+                            <div id="NewsletterMessageId"> </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
+        </div>
     </div>
-</div>
 <div class="container">
-    <pre>
-    <code>
-           @*@HtmlParser.Nou()*@
-        @HtmlParser.Nou("constructor")
-    </code>
-    </pre>
+        <pre>
+        <code>
+            @HtmlParser.Nou("destructor")
+        </code>
+        </pre>
 </div>
 <div>
-    <p>@KeywordsDetect.detect(@HtmlParser.Nou("constructor"), "constructor")</p>
+    <p>@KeywordsDetect.detect(@HtmlParser.Nou("destructor"), "destructor")</p>
+    @*<p>@PythonScriptHelper.PatchParameter()</p>*@
+    @*<p>@PythonScriptHelper.Incercare()</p>*@
+    <p>@Network.Functie()</p>
 </div>
 <!-- end banner -->
 
@@ -711,23 +724,3 @@
 @section Scripts{
     <script src="~/js/semantic.min.js"></script>
 }
-
-<script>
-    var detectLang = require('lang-detector');
-
-    detectLang('console.log("Hello world");')
-    // =>    'JavaScript'
-    detectLang('Hello world.', { statistics: true })
-    /* =>   {
-                "detected": "Unknown",
-                "statistics": {
-                    "JavaScript": 0,
-                    "C": 0,
-                    "C++": 0,
-                    "Python": 0,
-                     ...
-                    "Unknown": 1
-                }
-            } 
-     */
-</script>
