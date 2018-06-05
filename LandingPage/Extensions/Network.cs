@@ -53,7 +53,7 @@ namespace LandingPage.Extensions
         private static string MakeExamplePredictions(NeuralNetwork neuralNetwork)
         {
             StringBuilder s = new StringBuilder();
-            s.Append($"PREDICTION (0, 1): {neuralNetwork.PredictionFor(new[] { 0.0, 1.0 }, ParallelOptionsExtensions.SingleThreadedOptions)[0]}, EXPECTED: 1");
+            s.Append($"PREDICTION (0, 1): {neuralNetwork.PredictionFor(new[] { 0.328, 1.0 }, ParallelOptionsExtensions.SingleThreadedOptions)[0]}, EXPECTED: 1");
             System.Console.WriteLine(
                 $"PREDICTION (0, 1): {neuralNetwork.PredictionFor(new[] { 0.0, 1.0 }, ParallelOptionsExtensions.SingleThreadedOptions)[0]}, EXPECTED: 1");
             System.Console.WriteLine(
