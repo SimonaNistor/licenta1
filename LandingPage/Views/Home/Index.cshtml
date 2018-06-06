@@ -42,17 +42,17 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
                     <div class="subscribe-content text-center">
-                        <form action="#" method="post" id="newsletterForm">
+                        <form action="#" method="post" id="searchForm">
                             <div class="input-group">
-                                <input type="email" class="form-control ui email" id="newsletterUser" placeholder="Keyword1@Keyword2" required data-error="Please enter your valid email address" name="newsletterUser" />
+                                <input type="text" class="form-control ui email" id="searchBar" placeholder="Keyword1@Keyword2" name="searchBar" />
                                 <div class="help-block with-errors"></div>
                                 <span class="input-group-addon">
-                                    <input class="btn btn-primary" value="SEARCH" onclick="createUser()">
-
+                                    @*<input class="btn btn-primary" value="SEARCH" onclick="search()">*@
+                                <button onclick="search()" value="SEARCH" class="btn btn-primary ui submit button">Search</button>
                                 </span>
 
                             </div>
-                            <div id="NewsletterMessageId"> </div>
+                            <div id="SearchMessageId"> </div>
                         </form>
                     </div>
                 </div>
@@ -721,6 +721,25 @@
     }
 
     </script>*@
+<script>
+    $(document).ready(function () {
+        initialize();
+    });
+    function search() {
+        var data = $('#searchBar').val();
+        $.ajax({
+            type: "POST",
+            url: '/admin/searches/Create',
+            data: {
+                keywords: data
+            }
+        }).success(function (response) {
+            document.getElementById("SearchMessageId").innerHTML = response.message;
+            if (response.success == true)
+                $('#searchBar').val('');
+        })
+    }
+</script>
 @section Scripts{
     <script src="~/js/semantic.min.js"></script>
 }

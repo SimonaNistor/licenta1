@@ -19,8 +19,7 @@ namespace LandingPage.Extensions
         STD = 2,
         COUT = 2, CIN = 2, ENDL = 2,
         PUBLIC = 2, PROTECTED = 2, PRIVATE = 2, NULLPTR = 2,
-        NEW = 1, DEFINE = 1, CLASS = 1, VOID = 1, ELSE = 1, IF = 1, WHILE = 1, LIST = -1, ARRAYLIST = -1
-    }
+        NEW = 1, DEFINE = 1, CLASS = 1, VOID = 1, ELSE = 1, IF = 1, WHILE = 1, LIST = -1, ARRAYLIST = -1    }
 
     
 
@@ -36,6 +35,7 @@ namespace LandingPage.Extensions
             constructor.Add("private", 1);
             constructor.Add("destructor", -10);
             constructor.Add("()", 1);
+            ////////////////////////////////////////////////
             destructor.Add("destructor", 50);
             destructor.Add("~", 2);
             destructor.Add("constructor", -10);

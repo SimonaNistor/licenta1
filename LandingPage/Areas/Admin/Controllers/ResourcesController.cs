@@ -1,4 +1,5 @@
-﻿using LandingPage.Models.ResourcesViewModels;
+﻿using DBModels;
+using LandingPage.Models.ResourcesViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -6,7 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Service;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LandingPage.Areas.Admin.Controllers
@@ -82,25 +85,44 @@ namespace LandingPage.Areas.Admin.Controllers
             return View(item);
         }
 
-        [Route("admin/resources/upload")]
-        [HttpGet]
-        public IActionResult Upload(int id)//ce primesc aici?
-        {
-            return Json(new { success = true, message = "V-ati abonat cu succes la newsletter" });
+        //[Route("admin/resources/upload")]
+        //[HttpGet]
+        //public IActionResult Upload(int id)//ce primesc aici?
+        //{
+        //    return Json(new { success = true, message = "V-ati abonat cu succes la newsletter" });
 
-        }
-
+        //}
+                
         [HttpPost]
-        public ActionResult UploadFile(IFormFile file)
+        public async Task<IActionResult> Post(List<IFormFile> files)
         {
-            List<string> errors = new List<string>(); // added this just to return something
+            long size = files.Sum(f => f.Length);
+            
+            var filePath = Path.GetTempFileName();
 
-            if (file != null)
+            var item = new ResourcesViewModels();
+
+            foreach (var formFile in files)
             {
-                // do something
+
+                if (formFile.Length > 0)
+                {
+                    item.Type = formFile.ContentType.ToString();
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await formFile.CopyToAsync(stream);
+                        String s = "";
+                        stream.Position = 0;
+                        StreamReader sr = new StreamReader(stream);
+                        s = sr.ReadToEnd();
+                        item.Code = s;
+                        new ResourcesManager().Create(new ResourcesViewModels().TransformResourcesVM(item));
+
+                    }
+                }
             }
 
-            return Json(new { success = true, message = "V-ati abonat cu succes la newsletter" });
+            return RedirectToAction("Index"); //Ok(new { count = files.Count, size, filePath });
         }
     }
 }

@@ -32,10 +32,10 @@ Version      : 1.0
 	padding:0;
 	margin:0;
 }
-img{
-	border:none;
-	outline:none;
-	max-width:100%;
+img {
+    border: none;
+    outline: none;
+    max-width: 100%;
 }
 a,a:active,a:focus,a:hover{
 	outline:none;
