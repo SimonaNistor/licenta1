@@ -53,7 +53,7 @@ namespace LandingPage.Areas.Admin.Controllers
         }
 
         [Route("admin/searches/create")]
-        public string Create(string keywords)
+        public IActionResult Create(string keywords)
         {
             var _repo = new SearchesManager();
             //if (keywords == null)
@@ -65,7 +65,7 @@ namespace LandingPage.Areas.Admin.Controllers
                 int x = _repo.Create(keywords, DateTime.Now, Request.HttpContext.Connection.RemoteIpAddress.ToString());
                 //var search = new SearchesManager().GetById(x);
                 //Workflow.executeSearch(x);
-                return Workflow.executeSearch(keywords);//Json(new { success = true, message = "search succeeded" });
+                return Json(new { success = true, message = "search succeeded" });
             
 
         }

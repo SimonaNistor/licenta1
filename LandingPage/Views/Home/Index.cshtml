@@ -60,31 +60,36 @@
         </div>
         </div>
     </div>
-<div class="container">
-        <pre>
-            <code>
-                @*<div id="AfisareCodId"></div>*@
-                @HtmlParser.Nou("constructor")
-                @*@{HtmlParser.Nou(Request["searchBar"])}*@
-                @*@Workflow.executeSearch()*@
-                @*<script>
+<div class="afisareCodContainer"
+    <div class="container">
+            <pre>
+                <code>
+                    @*<p id="AfisareCodId"></p>*@
+                    @Workflow.execute()
+                    @*<div id="AfisareCodId"></div>*@
+                    @*@HtmlParser.Nou("constructor")*@
+                    @*@{HtmlParser.Nou(Request["searchBar"])}*@
+                    @*@Workflow.executeSearch()*@
+                    @*<script>
 
-            function myFunction() {
-                var x = document.getElementById("searchBar").value;
-                document.getElementById("demo").innerHTML = x;
-                @HtmlParser.Nou(@x)
-            }
-        </script>*@
-                @*@{
-                    <text>
-                        var keys = document.getElementById("searchBar").value;
-                    </text>
-                    @HtmlParser.Nou(keys)
+                function myFunction() {
+                    var x = document.getElementById("searchBar").value;
+                    document.getElementById("demo").innerHTML = x;
+                    @HtmlParser.Nou(@x)
+                }
+            </script>*@
+                    @*@{
+                        <text>
+                            var keys = document.getElementById("searchBar").value;
+                        </text>
+                        @HtmlParser.Nou(keys)
 
-                }*@
-            </code>
-        </pre>
+                    }*@
+                </code>
+            </pre>
+    </div>
 </div>
+<div id="AfisareCodId"></div>
 <div>
     <p>@HtmlParser.Quality("class")</p>
     <p>@KeywordsDetect.detect(@HtmlParser.Nou("javascript@CSS"), "javascript@CSS")</p>
@@ -758,13 +763,15 @@
                 keywords: data
             }
         }).success(function (response) {
-            document.getElementById("AfisareCodId").innerHTML = response.message;
-            
+            document.getElementById("SearchMessageId").innerHTML = response.message;
             if (response.success == true)
                 $('#searchBar').val('');
-            //document.getElementById("AfisareCodId").innerHTML = response.message;
-        })
+            document.getElementById("SearchMessageId").innerHTML = response.message;
+            })
+        $('#afisareCodContainer').load(document.URL + '#afisareCodContainer');
     }
+
+    
 
     function afisare() {
         var data = $('#searchBar').val();
@@ -775,10 +782,14 @@
                 keywords: data
             }
         }).success(function (response) {
+            console.log(response.message);
+            console.log(response.value);
             document.getElementById("AfisareCodId").innerHTML = response.message;
             if (response.success == true)
                 $('#searchBar').val('');
-        })
+            })
+        //$('#afisareCodContainer').load(document.URL + '#afisareCodContainer');
+        window.location.reload(true);
     }
 
 </script>
