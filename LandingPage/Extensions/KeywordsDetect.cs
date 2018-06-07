@@ -43,7 +43,7 @@ namespace LandingPage.Extensions
             destructor.Add("private", 1);
             destructor.Add("()", 1);
         }
-        public static int detect(string snippet,string keyword)
+        public static int detect(string snippet,string keywords)
         {
             List<Dictionary<string, int>> keywordsList = new List<Dictionary<string, int>>();
             Dictionary<string, int> constructor = new Dictionary<string, int>();
@@ -51,7 +51,7 @@ namespace LandingPage.Extensions
             initialize(constructor, destructor);
             keywordsList.Add(constructor);
             keywordsList.Add(destructor);
-            char[] delimiters = { '\n', ' ', ';','(',')',':'};
+            char[] delimiters = { '\n', ' ', ';','(',')',':','\'','\"'};
             string[] code = snippet.Split(delimiters);
             List<string> lista = new List<string>();
             foreach(string s in code)
@@ -62,14 +62,23 @@ namespace LandingPage.Extensions
                 }
             }
 
+            string[] keys = keywords.Split('@');
+            List<string> keysList = new List<string>();
+            foreach(string k in keys)
+            {
+                keysList.Add(k);
+            }
             int points = 0;
             foreach(var dictionary in keywordsList)
             {
-                if(dictionary.FirstOrDefault(x => x.Value == 50).Key.ToString() == keyword)
+                foreach (string k in keysList)
                 {
-                    for (int i = 0; i < lista.Count(); i++)
+                    if (dictionary.FirstOrDefault(x => x.Value == 50).Key.ToString() == k)
                     {
-                        points = points + verifyOne(lista[i], dictionary);
+                        for (int i = 0; i < lista.Count(); i++)
+                        {
+                            points = points + verifyOne(lista[i], dictionary);
+                        }
                     }
                 }
             }

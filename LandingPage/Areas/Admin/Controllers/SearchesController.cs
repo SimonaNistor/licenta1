@@ -1,4 +1,5 @@
-﻿using LandingPage.Models.SearchesViewModels;
+﻿using LandingPage.Extensions;
+using LandingPage.Models.SearchesViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -61,8 +62,10 @@ namespace LandingPage.Areas.Admin.Controllers
             }
             else
             {
-                
-                _repo.Create(keywords, DateTime.Now, Request.HttpContext.Connection.RemoteIpAddress.ToString());
+
+                int x = _repo.Create(keywords, DateTime.Now, Request.HttpContext.Connection.RemoteIpAddress.ToString());
+                //var search = new SearchesManager().GetById(x);
+                Workflow.executeSearch(x);
                 return Json(new { success = true, message = "search succeeded" });
             }
 

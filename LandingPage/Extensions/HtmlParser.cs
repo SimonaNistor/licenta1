@@ -1,7 +1,10 @@
-﻿using HtmlAgilityPack;
+﻿using DBModels;
+using HtmlAgilityPack;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.NodeServices;
 using Microsoft.Extensions.Configuration;
+using NeuralNetworks.Library;
+using Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,18 +17,46 @@ namespace LandingPage.Extensions
 {
     public class HtmlParser
     {
-        public static string Nou(string keyword)
+        public static string Nou(string keywords)
         {
             List<string> rezultateCautare = cautare();
 
-            return selectBestSnippet(rezultateCautare, keyword);
+            return selectBestSnippet(rezultateCautare, keywords);
         }
 
         public static List<string> cautare()
         {
-            System.Net.WebClient wc = new System.Net.WebClient();
-            byte[] raw = wc.DownloadData("https://www.tutorialspoint.com/cplusplus/cpp_constructor_destructor.htm");
 
+            List<string> listaToateCoduri = new List<string>();
+            List<Links> listaLinkuri = new LinksManager().GetAll();
+            List<Resources> listaAlteSurse = new ResourcesManager().GetAll();
+
+
+            //get all code from links
+            List<string> listaIntermediara = new List<string>();
+            foreach(Links link in listaLinkuri)
+            {
+                listaIntermediara = editareCod(link.link);
+                foreach (String cod in listaIntermediara)
+                {
+                    listaToateCoduri.Add(cod);
+                }
+                listaIntermediara.Clear();
+            }
+
+            //get all code from bd
+            foreach(Resources res in listaAlteSurse)
+            {
+                listaToateCoduri.Add(res.Code);
+            }
+
+            return listaToateCoduri;
+        }
+
+        public static List<string> editareCod(string link) //returneaza lista cu toate codurile din link
+        {
+            System.Net.WebClient wc = new System.Net.WebClient();
+            byte[] raw = wc.DownloadData(link);
             string webData = System.Text.Encoding.UTF8.GetString(raw);
             char[] delimiterChars = { '<', '>' };
             string[] code = webData.Split(delimiterChars);
@@ -36,7 +67,7 @@ namespace LandingPage.Extensions
                 count++;
                 ceva.AppendLine(code.ToString());
             }
-            string x = "empty";
+            string x = "";
             List<string> result = new List<string>();
             StringBuilder stringBuilder = new StringBuilder();
             for (int i = 0; i < count; i++)
@@ -62,20 +93,33 @@ namespace LandingPage.Extensions
             return x;
         }
 
-        public static string selectBestSnippet(List<string> code, string keyword)
+        public static string selectBestSnippet(List<string> code, string keywords)
         {
             int counter = 0;
             foreach(string s in code)
             {
                 counter++;
             }
-            List<int> values = new List<int>();
+            List<int> pointsKeywords = new List<int>();
+            List<int> pointsLanguage = new List<int>();
             for(int i=0;i<counter;i++)
             {
-                values.Add(KeywordsDetect.detect(code[i], keyword));
+                pointsKeywords.Add(KeywordsDetect.detect(code[i], keywords));
+                pointsLanguage.Add(LanguageDetect.detect(code[i]));
             }
-            int maxValue = values.Max();
-            int maxIndex = values.IndexOf(maxValue);
+
+            NeuralNetwork network = Network.Functie();
+            List<double> listResults = new List<double>();
+            for (int i=0; i<counter;i++)
+            {
+                //if (pointsKeywords[i] >= 0 && pointsLanguage[i] >= 0)
+                //{
+                    listResults.Add(Network.MakeExamplePredictions(network, pointsKeywords[i], pointsLanguage[i]));
+                //}
+            }
+
+            double maxValue = listResults.Max();
+            int maxIndex = listResults.IndexOf(maxValue);
             //var result = values.OrderByDescending(w => w).Take(3);
             //List<int> results = result.ToList();
             //return code[results[1]];

@@ -101,9 +101,9 @@ namespace LandingPage.Extensions
             ///////////////////////////////////////////////////////
             CSS.Add("style", -50);
         }
-        public static int detect(string snippet, string keyword)
+        public static int detect(string snippet)
         {
-            List<Dictionary<string, int>> keywordsList = new List<Dictionary<string, int>>();
+            List<Dictionary<string, int>> languagesList = new List<Dictionary<string, int>>();
             Dictionary<string, int> C = new Dictionary<string, int>();
             Dictionary<string, int> CPlusPlus = new Dictionary<string, int>();
             Dictionary<string, int> Javascript = new Dictionary<string, int>();
@@ -112,8 +112,8 @@ namespace LandingPage.Extensions
             Dictionary< string, int> HTML = new Dictionary<string, int>();
             Dictionary<string, int> CSS = new Dictionary<string, int>();
             initialize(C, CPlusPlus, Javascript, Python, Java, HTML, CSS);
-            keywordsList.Add(C);
-            keywordsList.Add(CPlusPlus);
+            languagesList.Add(C);
+            languagesList.Add(CPlusPlus);
             //
             char[] delimiters = { '\n', ' ', ';', '(', ')', '.', '<', '>', '/' };
             string[] code = snippet.Split(delimiters);
@@ -127,35 +127,14 @@ namespace LandingPage.Extensions
             }
 
             int points = 0;
-            foreach (var dictionary in keywordsList)
+            foreach (var dictionary in languagesList)
             {
-                if (dictionary.FirstOrDefault(x => x.Value == 50).Key.ToString() == keyword)
-                {
                     for (int i = 0; i < lista.Count(); i++)
                     {
                         points = points + verifyOne(lista[i], dictionary);
                     }
-                }
             }
 
-            return points;
-        }
-
-        public static int verifyAll(string x, List<Dictionary<string, int>> list)
-        {
-            int points = 0;
-            foreach (var keyword in list)
-            {
-                foreach (var pair in keyword)
-                {
-                    string key = pair.Key;
-                    int value = pair.Value;
-                    if (x == key)
-                    {
-                        points += value;
-                    }
-                }
-            }
             return points;
         }
 
