@@ -8,10 +8,10 @@ namespace LandingPage.Extensions
 {
     public class Workflow
     {
-        public static string executeSearch(int searchId)
+        public static string executeSearch(string keywords)
         {
-            var search = new SearchesManager().GetById(searchId);
-            string best = HtmlParser.Nou(search.Keywords);
+            //var search = new SearchesManager().GetById(searchId);
+            string best = HtmlParser.Nou(keywords);
             return best;
         }
         

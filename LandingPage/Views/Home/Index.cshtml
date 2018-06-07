@@ -44,11 +44,11 @@
                     <div class="subscribe-content text-center">
                         <form action="#" method="post" id="searchForm">
                             <div class="input-group">
-                                <input type="text" class="form-control ui" id="searchBar" placeholder="Keyword1@Keyword2" name="searchBar" />
+                                <input method="post" type="text" class="form-control ui" id="searchBar" placeholder="Keyword1@Keyword2" name="searchBar" />
                                 <div class="help-block with-errors"></div>
                                 <span class="input-group-addon">
                                     @*<input class="btn btn-primary" value="SEARCH" onclick="search()">*@
-                                <button onclick="search()" value="SEARCH" class="btn btn-primary ui submit button">Search</button>
+                                    <button onclick="search()" value="SEARCH" class="btn btn-primary ui submit button">Search</button>
                                 </span>
 
                             </div>
@@ -62,22 +62,31 @@
     </div>
 <div class="container">
         <pre>
-        <code>
-            @HtmlParser.Nou("constructor")
-            @*@Workflow.executeSearch()*@
-            @*<script>
+            <code>
+                @*<div id="AfisareCodId"></div>*@
+                @HtmlParser.Nou("constructor")
+                @*@{HtmlParser.Nou(Request["searchBar"])}*@
+                @*@Workflow.executeSearch()*@
+                @*<script>
 
-                function myFunction() {
-                    var x = document.getElementById("searchBar").value;
-                    document.getElementById("demo").innerHTML = x;
-                    @HtmlParser.Nou(@x)
-                }
-            </script>*@
-            
-        </code>
+            function myFunction() {
+                var x = document.getElementById("searchBar").value;
+                document.getElementById("demo").innerHTML = x;
+                @HtmlParser.Nou(@x)
+            }
+        </script>*@
+                @*@{
+                    <text>
+                        var keys = document.getElementById("searchBar").value;
+                    </text>
+                    @HtmlParser.Nou(keys)
+
+                }*@
+            </code>
         </pre>
 </div>
 <div>
+    <p>@HtmlParser.Quality("class")</p>
     <p>@KeywordsDetect.detect(@HtmlParser.Nou("javascript@CSS"), "javascript@CSS")</p>
     <p>@LanguageDetect.detect(@HtmlParser.Nou("javascript@CSS"))</p>
     @*<p>@PythonScriptHelper.PatchParameter()</p>*@
@@ -749,7 +758,24 @@
                 keywords: data
             }
         }).success(function (response) {
-            document.getElementById("SearchMessageId").innerHTML = response.message;
+            document.getElementById("AfisareCodId").innerHTML = response.message;
+            
+            if (response.success == true)
+                $('#searchBar').val('');
+            //document.getElementById("AfisareCodId").innerHTML = response.message;
+        })
+    }
+
+    function afisare() {
+        var data = $('#searchBar').val();
+        $.ajax({
+            type: "GET",
+            url: '/admin/searches/Afisare',
+            data: {
+                keywords: data
+            }
+        }).success(function (response) {
+            document.getElementById("AfisareCodId").innerHTML = response.message;
             if (response.success == true)
                 $('#searchBar').val('');
         })

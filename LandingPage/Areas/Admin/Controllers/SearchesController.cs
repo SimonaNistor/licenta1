@@ -53,7 +53,25 @@ namespace LandingPage.Areas.Admin.Controllers
         }
 
         [Route("admin/searches/create")]
-        public IActionResult Create(string keywords)
+        public string Create(string keywords)
+        {
+            var _repo = new SearchesManager();
+            //if (keywords == null)
+            //{
+            //    //return Json(new { success = false, message = "keywords gresite" });
+            //}
+            
+
+                int x = _repo.Create(keywords, DateTime.Now, Request.HttpContext.Connection.RemoteIpAddress.ToString());
+                //var search = new SearchesManager().GetById(x);
+                //Workflow.executeSearch(x);
+                return Workflow.executeSearch(keywords);//Json(new { success = true, message = "search succeeded" });
+            
+
+        }
+
+        [Route("admin/searches/Afisare")]
+        public IActionResult Afisare(string keywords)
         {
             var _repo = new SearchesManager();
             if (keywords == null)
@@ -63,13 +81,13 @@ namespace LandingPage.Areas.Admin.Controllers
             else
             {
 
-                int x = _repo.Create(keywords, DateTime.Now, Request.HttpContext.Connection.RemoteIpAddress.ToString());
+                //int x = _repo.Create(keywords, DateTime.Now, Request.HttpContext.Connection.RemoteIpAddress.ToString());
                 //var search = new SearchesManager().GetById(x);
-                Workflow.executeSearch(x);
-                return Json(new { success = true, message = "search succeeded" });
+
+                return Json(Workflow.executeSearch(keywords)); //Json(new { success = true, message = "search succeeded" });
             }
 
         }
-        
+
     }
 }

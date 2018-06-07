@@ -24,6 +24,13 @@ namespace LandingPage.Extensions
             return selectBestSnippet(rezultateCautare, keywords);
         }
 
+        public static int Quality(string keywords)
+        {
+            List<string> rezultateCautare = cautare();
+
+            return QualityTests.detect(rezultateCautare[11], keywords);
+        }
+
         public static List<string> cautare()
         {
 
@@ -93,7 +100,9 @@ namespace LandingPage.Extensions
             return x;
         }
 
-        public static string selectBestSnippet(List<string> code, string keywords)
+        
+
+        public static string selectBestSnippet(List<string> code, string keywords)//cu algoritmii
         {
             int counter = 0;
             foreach(string s in code)
