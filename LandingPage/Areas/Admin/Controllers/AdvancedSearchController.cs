@@ -154,19 +154,19 @@ namespace LandingPage.Areas.Admin.Controllers
 
         }
 
-        //[Route("admin/advancedSearch/chooseSearch1")]
-        //[HttpGet]
-        //public List<AdvancedSearch> chooseSearch1(int htmlId)
-        //{
-        //    ViewBag.HtmlTypeId = new SelectList(new HtmlTypesManager().GetAll(), "Id", "Name");
-        //    //var x = new AdvancedSearchManager().GetById(ViewBag.HtmlTypeId);
-        //    ViewBag.Values = new SelectList(new AdvancedSearchManager().GetByHtmlTypeId(htmlId), "Id", "Value");
+        [Route("admin/advancedSearch/chooseSearch1")]
+        [HttpGet]
+        public List<AdvancedSearch> chooseSearch1(int htmlId)
+        {
+            ViewBag.HtmlTypeId = new SelectList(new HtmlTypesManager().GetAll(), "Id", "Name");
+            //var x = new AdvancedSearchManager().GetById(ViewBag.HtmlTypeId);
+            ViewBag.Values = new SelectList(new AdvancedSearchManager().GetByHtmlTypeId(htmlId), "Id", "Value");
 
-        //    List<AdvancedSearch> lista = new AdvancedSearchManager().GetByHtmlTypeId(htmlId);
+            List<AdvancedSearch> lista = new AdvancedSearchManager().GetByHtmlTypeId(htmlId);
 
-        //    return lista;
+            return lista;
 
-        //}
+        }
 
         [Route("admin/advancedSearch/chooseSearch")]
         [HttpPost]
