@@ -20,11 +20,13 @@ namespace LandingPage.Areas.Admin.Controllers
     {
         private IHostingEnvironment _hostingEnvironment;
 
+        
         public AdvancedSearchController(IHostingEnvironment emv)
         {
             _hostingEnvironment = emv;
         }
 
+        [Authorize]
         [Route("admin/advancedSearch/getall")]
         public JsonResult GetAll(int cmsId)
         {
@@ -37,6 +39,7 @@ namespace LandingPage.Areas.Admin.Controllers
             }
             return Json(new { data = all });
         }
+        [Authorize]
         [Route("admin/advancedSearch")]
         public IActionResult Index(int cmsId)
         {
@@ -50,8 +53,6 @@ namespace LandingPage.Areas.Admin.Controllers
             ViewBag.cmsId = cmsId;
             return View(all);
         }
-
-        //[Route("admin/advancedSearch/result")]
         
 
         public IActionResult NewHome()
@@ -78,6 +79,7 @@ namespace LandingPage.Areas.Admin.Controllers
             return View(CMSViewModelList);
         }
 
+        [Authorize]
         [Route("admin/advancedSearch/deleteItem")]
         public JsonResult DeleteItem(int ItemId)
         {
@@ -93,6 +95,7 @@ namespace LandingPage.Areas.Admin.Controllers
                 return Json(false);
         }
 
+        [Authorize]
         [Route("admin/advancedSearch/createItem")]
         [HttpGet]
         public IActionResult Create(int id)
@@ -109,9 +112,9 @@ namespace LandingPage.Areas.Admin.Controllers
 
         }
 
-        
 
 
+        [Authorize]
         [Route("admin/advancedSearch/createItem")]
         [HttpPost]
         public async Task<IActionResult> Create(AdvancedSearchViewModels item)
@@ -137,6 +140,7 @@ namespace LandingPage.Areas.Admin.Controllers
         public IActionResult chooseSearch(int id)
         {
             ViewBag.HtmlTypeId = new SelectList(new HtmlTypesManager().GetAll(), "Id", "Name");
+            //var x = new AdvancedSearchManager().GetById(ViewBag.HtmlTypeId);
             ViewBag.Values = new SelectList(new AdvancedSearchManager().GetAll(), "Id", "Value");
 
             var viewModel = new AdvancedSearchViewModels();
@@ -160,6 +164,52 @@ namespace LandingPage.Areas.Admin.Controllers
             }
             return View(item);
         }
+        
+        public ActionResult CascadingDropDownList()
+        {
+            return View();
+        }
+
+        public JsonResult GetCascadeCategories()
+        {
+            //using (var northwind = new HttpContext)
+            //{
+            //    return Json(northwind.Categories
+            //        .Select(c => new { CategoryId = c.CategoryID, CategoryName = c.CategoryName }).ToList());
+            //}
+            var x = new HtmlTypesManager().GetAll();
+            return Json(x);
+        }
+
+        //public JsonResult GetCascadeProducts(int? categories)
+        //{
+        //    using (var northwind = GetContext())
+        //    {
+        //        var products = northwind.Products.AsQueryable();
+
+        //        if (categories != null)
+        //        {
+        //            products = products.Where(p => p.CategoryID == categories);
+        //        }
+
+        //        return Json(products.Select(p => new { ProductID = p.ProductID, ProductName = p.ProductName }).ToList());
+        //    }
+        //}
+
+        //public JsonResult GetCascadeOrders(int? products)
+        //{
+        //    using (var northwind = new SampleEntitiesDataContext())
+        //    {
+        //        var orders = northwind.OrderDetails.AsQueryable();
+
+        //        if (products != null)
+        //        {
+        //            orders = orders.Where(o => o.ProductID == products);
+        //        }
+
+        //        return Json(orders.Select(o => new { OrderID = o.OrderID, ShipCity = o.Order.ShipCity }).ToList());
+        //    }
+        //}
 
     }
 }
