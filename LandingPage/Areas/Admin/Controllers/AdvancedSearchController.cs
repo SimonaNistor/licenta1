@@ -1,4 +1,5 @@
-﻿using LandingPage.Models.AdvancedSearchViewModels;
+﻿using DBModels;
+using LandingPage.Models.AdvancedSearchViewModels;
 using LandingPage.Models.CMSDetailsViewModels;
 using LandingPage.Models.CMSViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -153,6 +154,20 @@ namespace LandingPage.Areas.Admin.Controllers
 
         }
 
+        //[Route("admin/advancedSearch/chooseSearch1")]
+        //[HttpGet]
+        //public List<AdvancedSearch> chooseSearch1(int htmlId)
+        //{
+        //    ViewBag.HtmlTypeId = new SelectList(new HtmlTypesManager().GetAll(), "Id", "Name");
+        //    //var x = new AdvancedSearchManager().GetById(ViewBag.HtmlTypeId);
+        //    ViewBag.Values = new SelectList(new AdvancedSearchManager().GetByHtmlTypeId(htmlId), "Id", "Value");
+
+        //    List<AdvancedSearch> lista = new AdvancedSearchManager().GetByHtmlTypeId(htmlId);
+
+        //    return lista;
+
+        //}
+
         [Route("admin/advancedSearch/chooseSearch")]
         [HttpPost]
         public async Task<IActionResult> chooseSearch(AdvancedSearchViewModels item)
@@ -165,51 +180,7 @@ namespace LandingPage.Areas.Admin.Controllers
             return View(item);
         }
         
-        public ActionResult CascadingDropDownList()
-        {
-            return View();
-        }
-
-        public JsonResult GetCascadeCategories()
-        {
-            //using (var northwind = new HttpContext)
-            //{
-            //    return Json(northwind.Categories
-            //        .Select(c => new { CategoryId = c.CategoryID, CategoryName = c.CategoryName }).ToList());
-            //}
-            var x = new HtmlTypesManager().GetAll();
-            return Json(x);
-        }
-
-        //public JsonResult GetCascadeProducts(int? categories)
-        //{
-        //    using (var northwind = GetContext())
-        //    {
-        //        var products = northwind.Products.AsQueryable();
-
-        //        if (categories != null)
-        //        {
-        //            products = products.Where(p => p.CategoryID == categories);
-        //        }
-
-        //        return Json(products.Select(p => new { ProductID = p.ProductID, ProductName = p.ProductName }).ToList());
-        //    }
-        //}
-
-        //public JsonResult GetCascadeOrders(int? products)
-        //{
-        //    using (var northwind = new SampleEntitiesDataContext())
-        //    {
-        //        var orders = northwind.OrderDetails.AsQueryable();
-
-        //        if (products != null)
-        //        {
-        //            orders = orders.Where(o => o.ProductID == products);
-        //        }
-
-        //        return Json(orders.Select(o => new { OrderID = o.OrderID, ShipCity = o.Order.ShipCity }).ToList());
-        //    }
-        //}
+        
 
     }
 }

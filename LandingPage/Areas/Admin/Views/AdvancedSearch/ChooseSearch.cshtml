@@ -1,4 +1,4 @@
-﻿
+﻿@model LandingPage.Models.AdvancedSearchViewModels.AdvancedSearchViewModels
 @{
     ViewData["Title"] = "chooseSearch";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -8,20 +8,13 @@
 <head>
 
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
-    <title></title>
-    <link rel="stylesheet" href="styles/kendo.common.min.css" />
-    <link rel="stylesheet" href="styles/kendo.default.min.css" />
-    <link rel="stylesheet" href="styles/kendo.default.mobile.min.css" />
-
-    <script src="js/jquery.min.js"></script>
-    <script src="js/kendo.all.min.js"></script>
 </head>
 
 <h2>Create</h2>
 
 <h4>AdvancedSearchViewModels</h4>
 <hr />
-@*<div class="row">
+<div class="row">
     <div class="col-md-4">
         <form asp-action="chooseSearch" enctype="multipart/form-data" asp-controller="AdvancedSearch">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -33,7 +26,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Value" class="control-label"></label>
-                <select asp-for="Value" class="form-control" id="HtmlTypeDDL" asp-items="ViewBag.Values"></select>
+                <select asp-for="Value" class="form-control" id="ValueId" asp-items="ViewBag.Values"></select>
                 <span asp-validation-for="Value" class="text-danger"></span>
             </div>
 
@@ -43,185 +36,31 @@
 
         </form>
     </div>
-</div>*@
-<div class="demo-section k-content">
-
-    <h4>HtmlTypes:</h4>
-    @*@Html.
-    @(AdvancedSearch()
-    .Name("HtmlTypes")
-    .HtmlAttributes(new { style = "width:100%" })
-    .OptionLabel("Select category...")
-    .DataTextField("Name")
-    .DataValueField("Id")
-    .DataSource(source =>
-    {
-    source.Read(read =>
-    {
-    read.Action("GetCascadeCategories", "AdvancedSearch");
-    });
-    })
-    )*@
-
-    @*<h4 style="margin-top: 2em;">Products:</h4>
-    @using LandingPage(Html.Kendo().AdvancedSearch()
-    .Name("products")
-    .HtmlAttributes(new { style = "width:100%" })
-    .OptionLabel("Select product...")
-    .DataTextField("ProductName")
-    .DataValueField("ProductID")
-    .DataSource(source =>
-    {
-    source.Read(read =>
-    {
-    read.Action("GetCascadeProducts", "AdvancedSearch")
-    .Data("filterProducts");
-    })
-    .ServerFiltering(true);
-    })
-    .Enable(false)
-    .AutoBind(false)
-    .CascadeFrom("categories")
-    )
-    <script>
-        function filterProducts() {
-            return {
-                categories: $("#categories").val()
-            };
-        }
-    </script>
-
-    <h4 style="margin-top: 2em;">Orders:</h4>
-    @using LandingPage(Html.LandingPage().AdvancedSearch()
-    .Name("orders")
-    .HtmlAttributes(new { style = "width:100%" })
-    .OptionLabel("Select order...")
-    .DataTextField("ShipCity")
-    .DataValueField("OrderID")
-    .DataSource(source =>
-    {
-    source.Read(read =>
-    {
-    read.Action("GetCascadeOrders", "AdvancedSearch")
-    .Data("filterOrders");
-    })
-    .ServerFiltering(true);
-    })
-    .Enable(false)
-    .AutoBind(false)
-    .CascadeFrom("products")
-    )*@
-    <script>
-        function filterOrders() {
-            return {
-                products: $("#products").val()
-            };
-        }
-    </script>
-    <button class="k-button k-primary" id="get" style="margin-top: 2em; float: right;">View Order</button>
 </div>
 
 
-<div id="example">
 
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
 
-    <div class="demo-section k-content">
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 
-        <h4>Categories:</h4>
-        <input id="categories" style="width: 100%;" />
-
-        <h4 style="margin-top: 2em;">Products:</h4>
-        <input id="products" disabled="disabled" style="width: 100%;" />
-
-        <h4 style="margin-top: 2em;">Orders:</h4>
-        <input id="orders" disabled="disabled" style="width: 100%;" />
-
-        <button class="k-button k-primary" id="get" style="margin-top: 2em; float: right;">View Order</button>
-
-    </div>
-
-    <script>
-        //$(document).ready(function () {
-        //    var categories = $("#HtmlTypes").data("AdvancedSearch")//,
-        //    //products = $("#products").data("kendoAdvancedSearch"),
-        //    //orders = $("#orders").data("kendoAdvancedSearch");
-
-        //    $("#get").click(function () {
-        //        var categoryInfo = "\nCategory: { id: " + categories.value() + ", name: " + categories.text() + " }"//,
-        //        //productInfo = "\nProduct: { id: " + products.value() + ", name: " + products.text() + " }",
-        //        //orderInfo = "\nOrder: { id: " + orders.value() + ", name: " + orders.text() + " }";
-
-        //        alert("Order details:\n" + categoryInfo);// + productInfo + orderInfo);
-        //    });
-        //});
-
-
-        $(document).ready(function () {
-            var categories = $("#categories").kendoDropDownList({
-                optionLabel: "Select category...",
-                dataTextField: "CategoryName",
-                dataValueField: "CategoryID",
-                dataSource: {
-                    type: "odata",
-                    serverFiltering: true,
-                    transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
-                    }
+@*<script>
+        function fct() {
+            var data = $('#HtmlTypeDDL').val();
+            $.ajax({
+                type: "POST",
+                url: '/admin/advancedsearch/chooseSearch1',
+                data: {
+                    htmlId: data
                 }
-            }).data("kendoDropDownList");
-
-            var products = $("#products").kendoDropDownList({
-                autoBind: false,
-                cascadeFrom: "categories",
-                optionLabel: "Select product...",
-                dataTextField: "ProductName",
-                dataValueField: "ProductID",
-                dataSource: {
-                    type: "odata",
-                    serverFiltering: true,
-                    transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
-                    }
-                }
-            }).data("kendoDropDownList");
-
-            var orders = $("#orders").kendoDropDownList({
-                autoBind: false,
-                cascadeFrom: "products",
-                optionLabel: "Select order...",
-                dataTextField: "Order.ShipCity",
-                dataValueField: "OrderID",
-                dataSource: {
-                    type: "odata",
-                    serverFiltering: true,
-                    transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Order_Details?$expand=Order"
-                    }
-                }
-            }).data("kendoDropDownList");
-
-            $("#get").click(function () {
-                var categoryInfo = "\nCategory: { id: " + categories.value() + ", name: " + categories.text() + " }",
-                    productInfo = "\nProduct: { id: " + products.value() + ", name: " + products.text() + " }",
-                    orderInfo = "\nOrder: { id: " + orders.value() + ", name: " + orders.text() + " }";
-
-                alert("Order details:\n" + categoryInfo + productInfo + orderInfo);
-            });
-        });
-    </script>
-    <style>
-        .k-readonly {
-            color: gray;
+            }).success(function (response) {
+                document.getElementById("ValueId").value = response.data;
+            })
         }
-    </style>
-
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>
-
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
-
-    <script src="~/js/jquery.js"></script>
+    </script>*@
+<script src="~/js/jquery.js"></script>
 
