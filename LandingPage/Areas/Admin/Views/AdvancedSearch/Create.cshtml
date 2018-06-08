@@ -1,0 +1,49 @@
+﻿@model LandingPage.Models.AdvancedSearchViewModels.AdvancedSearchViewModels
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var title = Model.Id > 0 ? "Editare" : "Creare";
+}
+
+<head>
+
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+</head>
+<h2>Create</h2>
+
+<h4>AdvancedSearchViewModels</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data" asp-controller="AdvancedSearch">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="HtmlTypeId" class="control-label"></label>
+                <select asp-for="HtmlTypeId" class="form-control" id="HtmlTypeDDL" asp-items="ViewBag.HtmlTypeId"></select>
+                <span asp-validation-for="HtmlTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Value" class="control-label"></label>
+                <input asp-for="Value" class="form-control" />
+                <span asp-validation-for="Value" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@title" class="btn btn-default" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script src="~/js/jquery.js"></script>
+

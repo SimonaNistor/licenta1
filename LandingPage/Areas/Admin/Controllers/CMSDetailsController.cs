@@ -83,6 +83,22 @@ namespace LandingPage.Areas.Admin.Controllers
 
         }
 
+        [Route("admin/cmsdetails/Demo")]
+        [HttpGet]
+        public IActionResult Demo(CMSDetailsViewModels item)
+
+        {
+            ViewBag.CMSId = new SelectList(new CMSManager().GetAll(), "Id", "Name");
+            ViewBag.HtmlTypeId = new SelectList(new HtmlTypesManager().GetAll(), "Id", "Name");
+            ViewBag.CMSDetails = new SelectList(new CMSDetailsManager().GetAll(), "Id", "Name");
+            ViewBag.HtmlTypes = new SelectList(new HtmlTypesManager().GetAll(), "Id", "Name");
+            var viewModel = new CMSDetailsViewModels();
+            viewModel = (CMSDetailsViewModels)(new CMSDetailsManager().GetById(1));
+            return View(viewModel);
+
+        }
+        
+
         [Route("admin/cmsdetails/createItem")]
         [HttpPost]
         public async Task<IActionResult> Create(CMSDetailsViewModels item, IFormFile FileUploadId)

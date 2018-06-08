@@ -1,0 +1,85 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="page-title">Content Details</h2>
+
+<a href="@Url.Action("Create","AdvancedSearch")"> Adauga item </a>
+<a href="@Url.Action("chooseSearch","AdvancedSearch")"> Search </a>
+
+
+<link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<div class="datatable">
+    <table id="datatable" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>HtmlTypeId</th>
+                <th>Value</th>
+                <th>Delete</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <th>HtmlTypeId</th>
+                <th>Value</th>
+                <th>Delete</th>
+                <th>Edit</th>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+    function reload() {
+        $('#datatable').DataTable({
+            ajax: "@Url.Action("GetAll", "AdvancedSearch", new { htmlTypeId = ViewBag.htmlTypeId })",
+            columns: [
+                { data: "id" },
+                { data: "htmlTypeId"},
+                { data: "value" },
+                {
+                    data: "id", render: function (data, type, row, meta) {
+                        data = '<input value="Stergere" type="Button" onclick="deleteItem(\'' + data + '\')" />';
+
+                        return data;
+                    }
+                },
+                {
+                    data: "id", render: function (data, type, row, meta) {
+                        var link = '/admin/advancedSearch/createItem?id=' + data;
+                        data = '<a href="' + link + '">Edit</a>';
+                        return data;
+                    }
+                }
+            ]
+        });
+    }
+
+     function deleteItem(data) {
+        $.ajax({
+            url: '@Url.Action("DeleteItem", "AdvancedSearch")',
+            data: { Id: data}
+        }).success(function (response) {
+            if (response == true) {
+                $('#datatable').DataTable().ajax.reload();
+            }
+            else { alert("Nu s-a putut sterge itemul");}
+
+        })
+
+    }
+
+    $(document).ready(function () {
+        reload();
+    });
+
+
+
+</script>
