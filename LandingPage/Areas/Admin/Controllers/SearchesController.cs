@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 namespace LandingPage.Areas.Admin.Controllers
 {
     [Area("admin")]
-    [Authorize]
     public class SearchesController : Controller
     {
         private IHostingEnvironment _hostingEnvironment;
@@ -23,12 +22,14 @@ namespace LandingPage.Areas.Admin.Controllers
         }
 
         [Route("admin/searches/getall")]
+        [Authorize]
         public JsonResult GetAll()
         {
             var all = new SearchesManager().GetAll();
             return Json(new { data = all });
         }
         [Route("admin/searches")]
+        [Authorize]
         public IActionResult Index()
         {
             var all = new SearchesManager().GetAll();
@@ -38,6 +39,7 @@ namespace LandingPage.Areas.Admin.Controllers
 
 
         [Route("admin/searches/deleteItem")]
+        [Authorize]
         public JsonResult DeleteItem(int id)
         {
             var _resourcesManager = new SearchesManager();

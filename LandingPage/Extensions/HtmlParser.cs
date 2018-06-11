@@ -24,11 +24,11 @@ namespace LandingPage.Extensions
             return selectBestSnippet(rezultateCautare, keywords);
         }
 
-        public static int Quality(string keywords)
+        public static string Quality(string k1, string k2)
         {
             List<string> rezultateCautare = cautare();
 
-            return QualityTests.detect(rezultateCautare[11], keywords);
+            return QualityTests.detect(rezultateCautare[11], "clasa", "arata tot");
         }
 
         public static List<string> cautare()

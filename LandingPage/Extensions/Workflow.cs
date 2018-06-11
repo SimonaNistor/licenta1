@@ -19,8 +19,8 @@ namespace LandingPage.Extensions
         public static string execute()
         {
             var x = new SearchesManager().GetAll();
-            var search = new SearchesManager().GetById(x.Count);
-            string best = HtmlParser.Nou(search.Keywords);
+            var z = new SearchesManager().GetLastEntry();
+            string best = HtmlParser.Nou(z.Keywords);
             return best;
         }
 
@@ -32,6 +32,7 @@ namespace LandingPage.Extensions
             int y = x.Count;
             return y;
         }
+        
 
     }
 }

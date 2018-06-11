@@ -44,5 +44,10 @@ namespace Service
         {
             return _repo.GetAll();
         }
+
+        public Searches GetLastEntry()
+        {
+            return _repo.GetLastEntry();
+        }
     }
 }

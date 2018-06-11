@@ -132,7 +132,7 @@
         <span asp-validation-for="HtmlTypeId" class="text-danger"></span>
     </div>*@
 <div>
-    <p>@HtmlParser.Quality("class")</p>
+    <p>@HtmlParser.Quality("clasa", "arata tot")</p>
     <p>@KeywordsDetect.detect(@HtmlParser.Nou("javascript@CSS"), "javascript@CSS")</p>
     <p>@LanguageDetect.detect(@HtmlParser.Nou("javascript@CSS"))</p>
     @*<p>@PythonScriptHelper.PatchParameter()</p>*@

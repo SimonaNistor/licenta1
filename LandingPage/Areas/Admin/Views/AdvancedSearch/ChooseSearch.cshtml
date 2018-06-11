@@ -20,19 +20,21 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="HtmlTypeId" class="control-label"></label>
-                <select asp-for="HtmlTypeId" class="form-control" id="HtmlTypeDDL" asp-items="ViewBag.HtmlTypeId"></select>
+                <label asp-for="HtmlTypeId" class="control-label">Select general term</label>
+                <select asp-for="HtmlTypeId" class="form-control" asp-items="ViewBag.HtmlTypeId" onchange="fct()">
+                    <option selected="true" disabled="true">Select something</option>
+                </select>
                 <span asp-validation-for="HtmlTypeId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Value" class="control-label"></label>
-                <select asp-for="Value" class="form-control" id="ValueId" asp-items="ViewBag.Values"></select>
+                <label asp-for="Value" class="control-label">Select a more specific term</label>
+                <select asp-for="Value" class="form-control"></select>
                 <span asp-validation-for="Value" class="text-danger"></span>
             </div>
             <div class="ValueId1"></div>
 
             <div class="form-group">
-                <input type="submit" value="@title" class="btn btn-default" />
+                <button value="SEARCH" class="btn btn-primary ui submit button">Search</button>
             </div>
 
         </form>
@@ -45,23 +47,40 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+
+
+<script>
+    function fct() {
+        var x = $('#HtmlTypeId').val();
+        $.ajax({
+            type: "GET",
+            url: '/admin/advancedsearch/chooseSearch1',
+            data: {
+                htmlId: x
+            }
+        }).success(function (data) {
+            $('#Value').empty();
+            $.each(data, function (i, item) {
+                $('#Value').append('<option value="' + item["value"] + '" selected="selected">' + item["value"]+ '</option>');
+            });
+            
+        })
+    }
+
+    function search() {
+        var y = $('#Value').val();
+        $.ajax({
+            type: "POST",
+            url: '/admin/advancedsearch/chooseSearch',
+            data: {
+                searchId: y
+            }
+        }).success(function (response) {
+        })
+    }
+</script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-
-<script>
-        function fct() {
-            var data = $('#HtmlTypeDDL').val();
-            $.ajax({
-                type: "POST",
-                url: '/admin/advancedsearch/chooseSearch1',
-                data: {
-                    htmlId: data
-                }
-            }).success(function (response) {
-                document.getElementById("ValueId1").value = response.message;
-            })
-        }
-    </script>
 <script src="~/js/jquery.js"></script>
 

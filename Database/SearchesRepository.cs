@@ -115,6 +115,28 @@ namespace Database
                 return list;
             }
         }
+
+        public Searches GetLastEntry()
+        {
+            using (var con = new SqlConnection(SQLHelper.ConnectionString))
+            {
+                var proc = con.CreateCommand();
+                proc.CommandType = System.Data.CommandType.StoredProcedure;
+                proc.CommandText = "Searches_GetLastEntry";
+                con.Open();
+                using (var reader = proc.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return FromReader(reader);
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+        }
     }
 
     public interface ISearchesRepository
@@ -124,5 +146,6 @@ namespace Database
         Searches GetById(int itemId);
         int Update(Searches s);
         List<Searches> GetAll();
+        Searches GetLastEntry();
     }
 }

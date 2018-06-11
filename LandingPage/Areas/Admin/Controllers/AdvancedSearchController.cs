@@ -1,4 +1,5 @@
 ﻿using DBModels;
+using LandingPage.Extensions;
 using LandingPage.Models.AdvancedSearchViewModels;
 using LandingPage.Models.CMSDetailsViewModels;
 using LandingPage.Models.CMSViewModels;
@@ -82,13 +83,13 @@ namespace LandingPage.Areas.Admin.Controllers
 
         [Authorize]
         [Route("admin/advancedSearch/deleteItem")]
-        public JsonResult DeleteItem(int ItemId)
+        public JsonResult DeleteItem(int Id)
         {
             var _cmsDetailsItemManager = new AdvancedSearchManager();
-            var item = _cmsDetailsItemManager.GetById(ItemId);
+            var item = _cmsDetailsItemManager.GetById(Id);
             if (item.Id > 0)
             {
-                _cmsDetailsItemManager.Delete(ItemId);
+                _cmsDetailsItemManager.Delete(Id);
 
                 return Json(true);
             }
@@ -170,17 +171,32 @@ namespace LandingPage.Areas.Admin.Controllers
 
         [Route("admin/advancedSearch/chooseSearch")]
         [HttpPost]
-        public async Task<IActionResult> chooseSearch(AdvancedSearchViewModels item)
+        public async Task<IActionResult> openSearchWindow(AdvancedSearchViewModels model)
         {
-            if (ModelState.IsValid)
-            {
-                //return RedirectToAction("Index");
-                return RedirectToAction("NewHome");
-            }
-            return View(item);
+            var x = new AdvancedSearchManager().GetByHtmlTypeId(model.HtmlTypeId).Where(item => item.Value == model.Value).FirstOrDefault();
+            //return RedirectToAction("NewHome", searchId);
+
+            return RedirectToAction("resultSearch", new { id = x.Id });
         }
-        
-        
+
+        //[Route("admin/advancedSearch/loadResult")]
+        //[HttpGet]
+        public string loadResult(int search)
+        {
+
+            var x = new AdvancedSearchManager().GetById(search);
+            HtmlTypes c = new HtmlTypesManager().GetById(x.HtmlTypeId);
+            return HtmlParser.Quality(c.Name, x.Value);
+        }
+
+        public IActionResult resultSearch(int id)
+        {
+            var x = new AdvancedSearchManager().GetById(id);
+            HtmlTypes c = new HtmlTypesManager().GetById(x.HtmlTypeId);
+            string res=  HtmlParser.Quality(c.Name, x.Value);
+            ViewBag.result = res;
+            return View();
+        }
 
     }
 }
