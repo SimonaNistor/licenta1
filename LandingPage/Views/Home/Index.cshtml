@@ -2,12 +2,12 @@
 @using LandingPage.Extensions
 
 @{
-//ViewData["Title"] = "Home Page";
-//var _cmsRepo = new Service.CMSManager();
-//var listCmsDetails = Model.Where(obj => obj.Id == 39).First().CMSDetails;
-//var listReviews = Model.Where(obj => obj.Id == 40).First().CMSDetails;
-//var listVideos = Model.Where(obj => obj.Id == 36).First().CMSDetails;
-//var listPrices = Model.Where(obj => obj.Id == 43).First().CMSDetails;
+    //ViewData["Title"] = "Home Page";
+    //var _cmsRepo = new Service.CMSManager();
+    //var listCmsDetails = Model.Where(obj => obj.Id == 39).First().CMSDetails;
+    //var listReviews = Model.Where(obj => obj.Id == 40).First().CMSDetails;
+    //var listVideos = Model.Where(obj => obj.Id == 36).First().CMSDetails;
+    //var listPrices = Model.Where(obj => obj.Id == 43).First().CMSDetails;
 }
 
 
@@ -28,40 +28,44 @@
     </div>
 </div>
 
+
 <div id="home" class="banner" style="">
     <div class="overlay"></div>
     @*<div class="curve"></div>*@
     <div class="banner-caption">
-
-        <div class="container">
-            <div class="row">
-                <div class="caption-inner text-center wow fadeInUp">
-                    <h1>INSTRUMENT PENTRU AUTOMATIZAREA CREARII DE SOFTWARE</h1>
+        <section class="section-spacing" id="cautare">
+            <div class="container">
+                <div class="row">
+                    <div class="caption-inner text-center wow fadeInUp">
+                        <h1>INSTRUMENT PENTRU AUTOMATIZAREA CREARII DE SOFTWARE</h1>
+                    </div>
+                    <div class="caption-inner text-center wow fadeInUp"></div>
                 </div>
-                <div class="caption-inner text-center wow fadeInUp"></div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-                    <div class="subscribe-content text-center">
-                        <form action="#" method="post" id="searchForm">
-                            <div class="input-group">
-                                <input method="post" type="text" class="form-control ui" id="searchBar" placeholder="Keyword1@Keyword2" name="searchBar" />
-                                <div class="help-block with-errors"></div>
-                                <span class="input-group-addon">
-                                    @*<input class="btn btn-primary" value="SEARCH" onclick="search()">*@
-                                    <button onclick="search()" value="SEARCH" class="btn btn-primary ui submit button">Search</button>
-                                </span>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+                        <div class="subscribe-content text-center">
+                            <form action="#" method="post" id="searchForm">
+                                <div class="input-group">
+                                    <input method="post" type="text" class="form-control ui" id="searchBar" placeholder="Keyword1@Keyword2" name="searchBar" />
+                                    <div class="help-block with-errors"></div>
+                                    <span class="input-group-addon">
+                                        @*<input class="btn btn-primary" value="SEARCH" onclick="search()">*@
+                                        <button onclick="search()" value="SEARCH" class="btn btn-primary ui submit button">Search</button>
+                                    </span>
 
 
-                            </div>
-                            <div id="SearchMessageId"> </div>
-                        </form>
+                                </div>
+                                <div id="SearchMessageId"> </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
 </div>
+
+
 <div class="afisareCodContainer">
     <div class="container">
         <pre>
@@ -73,80 +77,47 @@
 </div>
 <div id="AfisareCodId"></div>
 
-<p>@Html.ActionLink("Menus","ChooseSearch", "~/Areas/Admin/Views/AdvancedSearch", null, new { @class = "page-scroll" })</p>
-<button onclick="myFunction()">Try it</button>
-<a href="~/Views/Home/Contact.cshtml">~/Views/Home/Contact.cshtml</a>
 
-
-
-
-@using static Service.CMSDetailsManager{
-@using static Service.HtmlTypesManager
-    {
-@*var list = Model.Where(obj => obj.HtmlTypeId == 1).First().Content;*@
-
-@*<div class="row">
-        <div class="col-md-4">
-            <form asp-action="Demo" enctype="multipart/form-data" asp-controller="CMSDetails">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="Id" />
-                <div class="form-group">
-                    <label asp-for="CMSId" class="control-label"></label>
-                    <select asp-for="CMSId" class="form-control" asp-items="ViewBag.CMSId"></select>
-                    <span asp-validation-for="CMSId" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Name" class="control-label"></label>
-                    <select asp-for="Name" class="form-control" asp-items="ViewBag.CMSDetails"></select>
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="OrderIndex" class="control-label"></label>
-                    <input asp-for="OrderIndex" class="form-control" />
-                    <span asp-validation-for="OrderIndex" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="HtmlTypeId" class="control-label"></label>
-                    <select asp-for="HtmlTypeId" class="form-control" id="HtmlTypeDDL" asp-items="ViewBag.HtmlTypeId"></select>
-                    <span asp-validation-for="HtmlTypeId" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Content" class="control-label"></label>
-                    <select asp-for="Content" class="form-control" id="HtmlTypeDDL" asp-items="ViewBag.HtmlTypes"></select>
-                    <span asp-validation-for="Content" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Search" class="btn btn-default" />
-                </div>
-
-            </form>
-        </div>
-    </div>*@
-    }
-
-
-
-@*<div class="form-group">
-        <label asp-for="CMS" class="control-label"></label>
-        <select asp-for="HtmlTypeId" class="form-control" id="HtmlTypeDDL" asp-items="ViewBag.HtmlTypeId"></select>
-        <span asp-validation-for="HtmlTypeId" class="text-danger"></span>
-    </div>*@
 <div>
-    <p>@HtmlParser.Quality("clasa", "arata tot")</p>
-    <p>@KeywordsDetect.detect(@HtmlParser.Nou("javascript@CSS"), "javascript@CSS")</p>
-    <p>@LanguageDetect.detect(@HtmlParser.Nou("javascript@CSS"))</p>
+    @*<p>@HtmlParser.Quality("clasa", "arata tot")</p>
+        <p>@KeywordsDetect.detect(@HtmlParser.Nou("javascript@CSS"), "javascript@CSS")</p>
+        <p>@LanguageDetect.detect(@HtmlParser.Nou("javascript@CSS"))</p>*@
     @*<p>@PythonScriptHelper.PatchParameter()</p>*@
     @*<p>@PythonScriptHelper.Incercare()</p>*@
     @*<p>(-18, 53) - @Network.Functie1(-18, 53) </p>
-    <p>(32, 59) - @Network.Functie1(32, 59)</p>
-    <p>(106, 53) - @Network.Functie1(106, 53)</p>
-    <p>(106, 63) - @Network.Functie1(106, 63)</p>
-    <p>(96, 59) - @Network.Functie1(96, 59)</p>*@
+        <p>(32, 59) - @Network.Functie1(32, 59)</p>
+        <p>(106, 53) - @Network.Functie1(106, 53)</p>
+        <p>(106, 63) - @Network.Functie1(106, 63)</p>
+        <p>(96, 59) - @Network.Functie1(96, 59)</p>*@
 </div>
 <!-- end banner -->
 
+
+<div class="section-title text-center">
+</div>
+
 <section class="section-spacing" id="advanced">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="features-wrapper">
+                    <ul class="icon-right">
+                        <li class="wow fadeInLeft" data-wow-delay="0.2s">
+                            <div class="feature-info">
+                                <h4>Cautare dupa alte criterii</h4>
+                                <p>*descriere*</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <button onclick="myFunction()" class="btn btn-primary ui submit button">CAUTARE AVANSATA</button>
+    </div>
 </section>
+
+
 <section class="section-spacing" id="features">
     <div class="container">
         <div class="row">

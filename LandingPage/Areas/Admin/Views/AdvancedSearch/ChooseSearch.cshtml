@@ -1,7 +1,7 @@
 ﻿@model LandingPage.Models.AdvancedSearchViewModels.AdvancedSearchViewModels
 @{
     ViewData["Title"] = "chooseSearch";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Admin/Views/AdvancedSearch/_Layout.cshtml";
     var title = Model.Id > 0 ? "Editare" : "Creare";
 }
 
@@ -9,78 +9,71 @@
 
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
 </head>
+<div id="wrapper">
+                <form asp-action="chooseSearch" enctype="multipart/form-data" asp-controller="AdvancedSearch">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="HtmlTypeId" class="control-label">Select general term</label>
+                        <select asp-for="HtmlTypeId" class="form-control" asp-items="ViewBag.HtmlTypeId" onchange="fct()">
+                            <option selected="true" disabled="true">Select something</option>
+                        </select>
+                        <span asp-validation-for="HtmlTypeId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Value" class="control-label">Select a more specific term</label>
+                        <select asp-for="Value" class="form-control"></select>
+                        <span asp-validation-for="Value" class="text-danger"></span>
+                    </div>
+                    <div class="ValueId1"></div>
 
-<h2>Create</h2>
+                    <div class="form-group">
+                        <button value="SEARCH" class="btn btn-primary ui submit button">Search</button>
+                    </div>
 
-<h4>AdvancedSearchViewModels</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="chooseSearch" enctype="multipart/form-data" asp-controller="AdvancedSearch">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="HtmlTypeId" class="control-label">Select general term</label>
-                <select asp-for="HtmlTypeId" class="form-control" asp-items="ViewBag.HtmlTypeId" onchange="fct()">
-                    <option selected="true" disabled="true">Select something</option>
-                </select>
-                <span asp-validation-for="HtmlTypeId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Value" class="control-label">Select a more specific term</label>
-                <select asp-for="Value" class="form-control"></select>
-                <span asp-validation-for="Value" class="text-danger"></span>
-            </div>
-            <div class="ValueId1"></div>
-
-            <div class="form-group">
-                <button value="SEARCH" class="btn btn-primary ui submit button">Search</button>
-            </div>
-
-        </form>
-    </div>
+                </form>
 </div>
 
+    <style>
+        #wrapper {
+            margin-top:10%;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
 
+    <script>
+        function fct() {
+            var x = $('#HtmlTypeId').val();
+            $.ajax({
+                type: "GET",
+                url: '/admin/advancedsearch/chooseSearch1',
+                data: {
+                    htmlId: x
+                }
+            }).success(function (data) {
+                $('#Value').empty();
+                $.each(data, function (i, item) {
+                    $('#Value').append('<option value="' + item["value"] + '" selected="selected">' + item["value"] + '</option>');
+                });
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+            })
+        }
 
-
-
-<script>
-    function fct() {
-        var x = $('#HtmlTypeId').val();
-        $.ajax({
-            type: "GET",
-            url: '/admin/advancedsearch/chooseSearch1',
-            data: {
-                htmlId: x
-            }
-        }).success(function (data) {
-            $('#Value').empty();
-            $.each(data, function (i, item) {
-                $('#Value').append('<option value="' + item["value"] + '" selected="selected">' + item["value"]+ '</option>');
-            });
-            
-        })
+        function search() {
+            var y = $('#Value').val();
+            $.ajax({
+                type: "POST",
+                url: '/admin/advancedsearch/chooseSearch',
+                data: {
+                    searchId: y
+                }
+            }).success(function (response) {
+            })
+        }
+    </script>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     }
-
-    function search() {
-        var y = $('#Value').val();
-        $.ajax({
-            type: "POST",
-            url: '/admin/advancedsearch/chooseSearch',
-            data: {
-                searchId: y
-            }
-        }).success(function (response) {
-        })
-    }
-</script>
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
-<script src="~/js/jquery.js"></script>
+    <script src="~/js/jquery.js"></script>
 

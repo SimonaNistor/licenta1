@@ -1,7 +1,14 @@
 ﻿
 @{
     ViewData["Title"] = "resultSearch";
+    Layout = "~/Areas/Admin/Views/AdvancedSearch/_Layout.cshtml";
 }
+
+<div class="afisareButon"></div>
+<div id="wrapper">
+    <button onclick="closeTab()" value="BACK" class="btn btn-primary ui submit button">Go Back</button>
+</div>
+
 
 <div class="afisareCodContainer">
     <div class="container">
@@ -13,5 +20,30 @@
     </div>
 </div>
 
-<h2>resultSearch</h2>
+<div id="wrapper">
+    <button onclick="closeTab()" value="BACK" class="btn btn-primary ui submit button">Go Back</button>
+</div>
+
+
+<style>
+    .afisareCodContainer{
+        margin-top:5%;
+    }
+    .afisareButon{
+        margin-top:5%;
+    }
+    #wrapper {
+        display: flex;
+        justify-content: center;
+    }
+</style>
+
+<script>
+    function closeTab() {
+        if (confirm("Close Tab?")) {
+            close();
+        }
+
+    }
+</script>
 
