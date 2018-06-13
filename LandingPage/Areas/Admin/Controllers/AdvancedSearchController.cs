@@ -183,7 +183,6 @@ namespace LandingPage.Areas.Admin.Controllers
         //[HttpGet]
         public string loadResult(int search)
         {
-
             var x = new AdvancedSearchManager().GetById(search);
             HtmlTypes c = new HtmlTypesManager().GetById(x.HtmlTypeId);
             return HtmlParser.Quality(c.Name, x.Value);

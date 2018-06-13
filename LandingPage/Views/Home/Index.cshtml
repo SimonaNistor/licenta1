@@ -65,6 +65,16 @@
     </div>
 </div>
 
+<div class="wrapper">
+    <div class="row">
+        <div class="col-xs-4">
+            <canvas id="myChart" width="200" height="200"></canvas>
+        </div>
+        <div class="col-xs-6" id="numar">
+            @HtmlParser.numere(Workflow.getLastSearchKeywords())
+        </div>
+    </div>
+</div>
 
 <div class="afisareCodContainer">
     <div class="container">
@@ -84,17 +94,44 @@
         <p>@LanguageDetect.detect(@HtmlParser.Nou("javascript@CSS"))</p>*@
     @*<p>@PythonScriptHelper.PatchParameter()</p>*@
     @*<p>@PythonScriptHelper.Incercare()</p>*@
-    @*<p>(-18, 53) - @Network.Functie1(-18, 53) </p>
-        <p>(32, 59) - @Network.Functie1(32, 59)</p>
+    <p>(-18, 53) - @Network.Functie1(-18, 53) </p>
+        @*<p>(32, 59) - @Network.Functie1(32, 59)</p>
         <p>(106, 53) - @Network.Functie1(106, 53)</p>
-        <p>(106, 63) - @Network.Functie1(106, 63)</p>
-        <p>(96, 59) - @Network.Functie1(96, 59)</p>*@
+        <p>(106, 63) - @Network.Functie1(106, 63)</p>*@
+        <p>(96, 59) - @Network.Functie1(96, 59)</p>
 </div>
 <!-- end banner -->
 
 
 <div class="section-title text-center">
 </div>
+
+@*<div class="demo-container">*@
+@*<div class="wrapper">
+    <div class="row">
+        <div id="chart" class="col-xs-4"></div>
+        @(Html.DevExtreme().Chart()
+            .ID("chart")
+            .Series(s => s
+                .Add()
+                .ArgumentField("Day")
+                .ValueField("Oranges")
+                .Name("My oranges")
+                .Type(SeriesType.Bar)
+                .Color("#ffaa66")
+            )
+            .DataSource(new List<object> {
+    new { Day = "Monday", Oranges = 3 },
+    new { Day = "Tuesday", Oranges = 2 },
+    new { Day = "Wednesday", Oranges = 3 },
+    new { Day = "Thursday", Oranges = 4 },
+    new { Day = "Friday", Oranges = 6 },
+    new { Day = "Saturday", Oranges = 11 },
+    new { Day = "Sunday", Oranges = 4 }
+            })
+        )
+    </div>
+</div>*@
 
 <section class="section-spacing" id="advanced">
     <div class="overlay"></div>
@@ -617,9 +654,20 @@
 <script type="text/javascript" src="https://maps.google.com/maps/api/js?js?sensor=false&key=AIzaSyDkpD0-hjaAUydUfLOlXKKqInB64EqyCBo"></script>
 <script src="~/js/script.js"></script>
 <script src="~/js/prism.js"></script>
-<script src="~/js/languageIdentifier.js"></script>
 <script src="~/js/require.js"></script>
-
+<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.1.0.min.js"></script>
+<!-- DevExtreme themes -->
+<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/18.1.3/css/dx.common.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/18.1.3/css/dx.light.css" />
+<!-- A DevExtreme library -->
+<script type="text/javascript" src="https://cdn3.devexpress.com/jslib/18.1.3/js/dx.all.js"></script>
+<!-- DevExtreme dependencies -->
+<!-- DevExtreme themes -->
+<!-- A DevExtreme library -->
+<!-- <script type="text/javascript" src="js/dx.mobile.js"></script> -->
+<!-- <script type="text/javascript" src="js/dx.web.js"></script> -->
+<!-- <script type="text/javascript" src="js/dx.viz.js"></script> -->
+<!-- <script type="text/javascript" src="js/dx.viz-web.js"></script> -->
 @*<script>
     $(document).ready(function () {
         initialize();
@@ -764,6 +812,20 @@
     }
 
     </script>*@
+
+<style>
+    #chart {
+        height: 440px;
+    }
+    #wrapper {
+        display: flex;
+        justify-content: center;
+    }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+
 <script>
     $(document).ready(function () {
         initialize();
@@ -789,7 +851,121 @@
         window.open("admin/advancedSearch/chooseSearch");
     }
 
+    //window.onload = incarcareChart;
+
+    //function incarcareChart() {
+    //    $.ajax({
+    //        type: "GET",
+    //        url: '/charts/functie',
+    //        data: {
+    //        },
+    //        async:false,
+    //        success: function (date) {
+    //            console.log(date);
+    //            var json = $.parseJSON(date.dataSource);
+    //            $("#chart").dxChart({
+    //                dataSource: json,
+    //                series: {
+    //                    argumentField: "day",
+    //                    valueField: "oranges",
+    //                    name: "My oranges",
+    //                    type: "bar",
+    //                    color: '#ffaa66'
+    //                }
+    //            });
+    //        },
+    //        error: function (error) { 
+    //            alert(error);
+    //        }
+    //    });
+    //}
+
+    window.onload = incarcareChart;
+
+    function incarcareChart() {
+        $.ajax({
+            type: "GET",
+            url: '/charts/functie',
+            data: {
+            },
+            async:false,
+            success: function (date) {
+                console.log(date);
+                //var json = $.parseJSON(date.dataSource);
+                var ctx = document.getElementById("myChart");
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: Object.keys(date),
+                        datasets: [{
+                            label: 'My first dataset',
+                            fill: false,
+                            lineTension: 0,
+                            backgroundColor: "rgba(75,192,192,0.4)",
+                            borderColor: "rgba(75,192,192,1)",
+                            borderCapStyle: 'butt',
+                            borderDash: [],
+                            borderDashOffset: 0.0,
+                            borderJointStyle: 'miter',
+                            data: Object.values(date)
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: false
+                                }
+                            }]
+                        }
+                    }
+                });
+            },
+            error: function (error) { 
+                alert(error);
+            }
+        });
+    }
+
+    var data = {
+        "January": 65,
+        "February": 59,
+        "March": 80,
+        "April": 81,
+        "May": 56,
+        "June": 55
+    }
+
+    //var ctx = document.getElementById("myChart");
+    //var myChart = new Chart(ctx, {
+    //    type: 'line',
+    //    data: {
+    //        labels: Object.keys(data),
+    //        datasets: [{
+    //            label: 'My first dataset',
+    //            fill: false,
+    //            lineTension: 0,
+    //            backgroundColor: "rgba(75,192,192,0.4)",
+    //            borderColor: "rgba(75,192,192,1)",
+    //            borderCapStyle: 'butt',
+    //            borderDash: [],
+    //            borderDashOffset: 0.0,
+    //            borderJointStyle: 'miter',
+    //            data: Object.values(data)
+    //        }]
+    //    },
+    //    options: {
+    //        scales: {
+    //            yAxes: [{
+    //                ticks: {
+    //                    beginAtZero: false
+    //                }
+    //            }]
+    //        }
+    //    }
+    //});
 </script>
 @section Scripts{
     <script src="~/js/semantic.min.js"></script>
+    <script src="~/js/data.js"></script>
 }

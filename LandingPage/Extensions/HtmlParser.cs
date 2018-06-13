@@ -24,6 +24,19 @@ namespace LandingPage.Extensions
             return selectBestSnippet(rezultateCautare, keywords);
         }
 
+        public static List<int> numere(string keywords)
+        {
+            List<string> rezultateCautare = cautare();
+
+            List<int> numere= new List<int>();
+            foreach(string x in rezultateCautare)
+            {
+                numere.Add(KeywordsDetect.detect(x, keywords));
+                //numere += KeywordsDetect.detect(x, keywords);
+            }
+            return numere;
+        }
+
         public static string Quality(string k1, string k2)
         {
             List<string> rezultateCautare = cautare();

@@ -24,6 +24,20 @@ namespace LandingPage.Extensions
             return best;
         }
 
+        public static string getLastSearchKeywords()
+        {
+            var z = new SearchesManager().GetLastEntry();
+            return z.Keywords;
+        }
+
+        //public static List<int> executeStatistics()
+        //{
+        //    var x = new SearchesManager().GetAll();
+        //    var z = new SearchesManager().GetLastEntry();
+        //    List<int> numere = HtmlParser.numere(z.Keywords);
+        //    return numere;
+        //}
+
         public static int search()
         {
             var x = new SearchesManager().GetAll();

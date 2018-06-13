@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -55,8 +55,8 @@ namespace test
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
-            services.AddMvc();
-            services.AddNodeServices();
+            services.AddMvc();//.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver());
+            //services.AddNodeServices();
 
             // requires: using Microsoft.AspNetCore.Authorization;
             //           using Microsoft.AspNetCore.Mvc.Authorization;
