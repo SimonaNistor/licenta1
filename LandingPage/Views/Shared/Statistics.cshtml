@@ -4,18 +4,34 @@
     Layout = "~/Areas/Admin/Views/AdvancedSearch/_Layout.cshtml";
 }
 
-<div id="wrapper">
-    <button onclick="closeTab()" value="BACK" class="btn btn-primary ui submit button">Go Back</button>
-</div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-xs-6">
-            <canvas id="myChart" width="200" height="200"></canvas>
+<section class="section-spacing">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="section-title text-center">
+                    <h2>Rezumat Căutari</h2>
+                    &nbsp;
+                    &nbsp;
+                    <h4>Totalul tuturor cautarilor in functie de cuvintele cheie cautate</h4>
+                    &nbsp;
+                    <h4>Conform legendei, cautarile ce contin un singur cuvant cheie sunt afisate in exteriorul graficului</h4>
+                    &nbsp;
+                    <h4>Cautarile ce contin doua sau mai multe cuvinte cheie sunt afisate in interiorul graficului</h4>
+                    &nbsp;
+                    &nbsp;
+                    <button onclick="closeTab()" value="BACK" class="btn btn-primary ui submit button">Go Back</button>
+                </div>
+                
+            </div>
+
+            <div class="col-xs-6">
+                <canvas id="myChart" width="200" height="200"></canvas>
+            </div>
         </div>
         
     </div>
-</div>
+</section>
 
 <div id="wrapper">
     <button onclick="closeTab()" value="BACK" class="btn btn-primary ui submit button">Go Back</button>
@@ -78,21 +94,46 @@
                 alert(error);
             }
         });
-
+        var toate = Object.keys(k);
+        var t = Object.keys(m);
+        toate = toate + t;
         var ctx = document.getElementById("myChart");
         var myChart = new Chart(ctx, {
             type: 'doughnut',
             data: {
-                
                 datasets: [{
                     fill: false,
                     lineTension: 0,
                     backgroundColor: [
-                        "rgba(75,192,192,0.4)", 'black',
-                        'grey',
-                        'lightgrey'
+                        '#22313F',
+                        '#2C3E50',
+                        '#1F3A93',
+                        '#3A539B',
+                        '#446CB3',
+                        '#1E8BC3',
+                        '#19B5FE',
+                        '#6BB9F0',//albastru deschis
+                        '#81CFE0',//verde deschis
+                        '#4ECDC4',
+                        '#03C9A9',
+                        '#1BA39C',
+                        '#16A085',
+                        '#1E824C',
+                        '#049372',
+                        '#03A678',
+                        '#90C695',
+                        '#C8F7C5',
+                        '#FDE3A7',
+                        '#F4B350',
+                        '#EB9532',
+                        '#F89406',
+                        '#F9690E',
+                        '#D35400',
+                        '#C0392B',
+                        '#96281B'
+                        
                     ],
-                    borderColor: "rgba(75,192,192,1)",
+                    borderColor: 'lightgrey',
                     borderCapStyle: 'butt',
                     borderDash: [],
                     borderDashOffset: 0.0,
@@ -103,23 +144,47 @@
                         fill: false,
                         lineTension: 0,
                         backgroundColor: [
-                            "rgba(75,192,192,0.4)", 'black',
-                            'grey',
-                            'lightgrey'
+                            '#96281B',
+                            '#C0392B',
+                            '#D35400',
+                            '#F9690E',
+                            '#F89406',
+                            '#EB9532',
+                            '#F4B350',
+                            '#FDE3A7',
+                            '#C8F7C5',
+                            '#90C695',
+                            '#03A678',
+                            '#049372',
+                            '#1E824C',
+                            '#16A085',
+                            '#1BA39C',
+                            '#03C9A9',
+                            '#4ECDC4',
+                            '#81CFE0',//verde deschis
+                            '#6BB9F0',//albastru deschis
+                            '#19B5FE',
+                            '#1E8BC3',
+                            '#446CB3',
+                            '#3A539B',
+                            '#1F3A93',
+                            '#2C3E50',
+                            '#22313F',
                         ],
-                        borderColor: "rgba(75,192,192,1)",
+                        borderColor: 'lightgrey',
                         borderCapStyle: 'butt',
                         borderDash: [],
                         borderDashOffset: 0.0,
                         borderJointStyle: 'miter',
                         data: Object.values(m),
                         labels: Object.keys(m),
-                },]
+                    }],
+                labels: Object.keys(k)
             },
             options: {
                 responsive: true,
                 legend: {
-                    display: false,
+                    display: true,
                 },
                 tooltips: {
                     callbacks: {
