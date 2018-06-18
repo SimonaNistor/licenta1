@@ -24,7 +24,20 @@ namespace LandingPage.Extensions
             return best;
         }
 
+        public static string getBestScore()
+        {
+            string y = Workflow.getLastSearchKeywords();
+            double x = Math.Round(HtmlParser.getBestStat(y)*100,2);
+            return x.ToString();
+        }
+
         public static string getLastSearchKeywords()
+        {
+            var z = new SearchesManager().GetLastEntry();
+            return z.Keywords;
+        }
+
+        public static string getCurrentSearch()
         {
             var z = new SearchesManager().GetLastEntry();
             return z.Keywords;

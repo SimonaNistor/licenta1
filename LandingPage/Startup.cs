@@ -40,6 +40,12 @@ namespace test
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddAuthentication().AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+                googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+            });
+
             var skipHTTPS = Configuration.GetValue<bool>("LocalTest:skipHTTPS");
             // requires using Microsoft.AspNetCore.Mvc;
             services.Configure<MvcOptions>(options =>

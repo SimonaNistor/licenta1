@@ -17,8 +17,6 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" PrivateAssets="All" />
     <PackageReference Include="Npm" Version="3.5.2" />
     <PackageReference Include="TinyMCE" Version="4.7.9" />
-    <PackageReference Include="DevExtreme.AspNet.Core" Version="18.1.3" />
-    <PackageReference Include="DevExtreme.AspNet.Data" Version="1.4.5" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.2" />

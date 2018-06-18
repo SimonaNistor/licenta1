@@ -15,7 +15,7 @@ namespace LandingPage.Extensions
                                        Dictionary<string, int> HTML,
                                        Dictionary<string, int> CSS)
         {
-            //primitive variable declaration.
+            //primitive variable declaration
             C.Add("char", 2);
             C.Add("long", 2);
             C.Add("int", 2);
@@ -28,7 +28,7 @@ namespace LandingPage.Extensions
             //pointer
             C.Add("**", 2);
             C.Add("*()", 2);
-            // Array declaration.
+            // Array declaration
             C.Add("[]", 1);
             // #define macro
             C.Add("#define", 1);
