@@ -27,7 +27,8 @@ namespace LandingPage.Extensions
     {
         
         public static void initialize(Dictionary<string,int> constructor,
-                                       Dictionary<string, int> destructor)
+                                       Dictionary<string, int> destructor, 
+                                       Dictionary<string, int> mostenire)
         {
             constructor.Add("constructor", 50);
             constructor.Add("return", 2);
@@ -41,26 +42,42 @@ namespace LandingPage.Extensions
             destructor.Add("constructor", -10);
             destructor.Add("public", 1);
             destructor.Add("private", 1);
-            destructor.Add("()", 1);
+            destructor.Add("()", 2);
+            ///////////////////////////////////////////////
+            
+            mostenire.Add("Derived", 50);
+            mostenire.Add(": public", 50);
         }
         public static int detect(string snippet,string keywords)
         {
             List<Dictionary<string, int>> keywordsList = new List<Dictionary<string, int>>();
             Dictionary<string, int> constructor = new Dictionary<string, int>();
             Dictionary<string, int> destructor = new Dictionary<string, int>();
-            initialize(constructor, destructor);
+            Dictionary<string, int> mostenire = new Dictionary<string, int>();
+            initialize(constructor, destructor, mostenire);
             keywordsList.Add(constructor);
             keywordsList.Add(destructor);
-            char[] delimiters = { '\n', ' ', ';','(',')',':','\'','\"'};
-            string[] code = snippet.Split(delimiters);
-            List<string> lista = new List<string>();
-            foreach(string s in code)
+            //char[] delimiters = { '\n', ' ', ';','(',')',':','\'','\"'};
+
+            List<string> liniiCod = new List<string>();
+            string[] liniiDespartite = snippet.Split('\n');
+            foreach (string s in liniiDespartite)
             {
-                if(s!="")
+                if (s != "" && s != " ")
                 {
-                    lista.Add(s);
+                    liniiCod.Add(s);
                 }
             }
+
+            //string[] code = snippet.Split(delimiters);
+            //List<string> lista = new List<string>();
+            //foreach(string s in code)
+            //{
+            //    if(s!="")
+            //    {
+            //        lista.Add(s);
+            //    }
+            //}
 
             string[] keys = keywords.Split('@');
             List<string> keysList = new List<string>();
@@ -75,9 +92,9 @@ namespace LandingPage.Extensions
                 {
                     if (dictionary.FirstOrDefault(x => x.Value == 50).Key.ToString() == k)
                     {
-                        for (int i = 0; i < lista.Count(); i++)
+                        for (int i = 0; i < liniiCod.Count(); i++)
                         {
-                            points = points + verifyOne(lista[i], dictionary);
+                            points = points + verifyOne(liniiCod[i], dictionary);
                         }
                     }
                 }
@@ -95,10 +112,14 @@ namespace LandingPage.Extensions
                 {
                     string key = pair.Key;
                     int value = pair.Value;
-                    if (x == key)
+                    if(x.Contains(key))
                     {
                         points += value;
                     }
+                    //if (x == key)
+                    //{
+                    //    points += value;
+                    //}
                 }
             }
             return points;
@@ -111,10 +132,14 @@ namespace LandingPage.Extensions
             {
                 string key = pair.Key;
                 int value = pair.Value;
-                if (x == key)
+                if (x.Contains(key))
                 {
                     points += value;
                 }
+                //if (x == key)
+                //{
+                //    points += value;
+                //}
             }
             return points;
         }

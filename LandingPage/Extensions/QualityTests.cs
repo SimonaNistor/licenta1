@@ -36,7 +36,7 @@ namespace LandingPage.Extensions
             List<string> result = new List<string>();
             string className = "";
 
-            for(int i=0; i<lista.Count();i++)
+            for (int i = 0; i < lista.Count(); i++)
             {
                 if (lista[i].StartsWith("/*") && lista[i].EndsWith("*/"))
                 {
@@ -122,21 +122,21 @@ namespace LandingPage.Extensions
 
             for (int i = 0; i < lista.Count(); i++)
             {
-                if(lista[i]=="")
-                {
-                    lista.RemoveAt(i);
-                }
-                if(lista[i].Contains("\t"))
+                //if (lista[i] == "")
+                //{
+                //    lista.RemoveAt(i);
+                //}
+                if (lista[i].Contains("\t"))
                 {
                     int j = i;
-                    while(lista[i].Contains("\t"))
+                    while (lista[i].Contains("\t"))
                     {
-                        lista[i]=lista[i].Replace("\t", "");
+                        lista[i] = lista[i].Replace("\t", "");
                     }
                 }
             }
             //get nume clase
-            
+
             for (int i = 0; i < lista.Count(); i++)
             {
                 if (lista[i].Contains("class"))
@@ -167,13 +167,13 @@ namespace LandingPage.Extensions
                     while (!lista[i].Contains("public:") && !lista[i].Contains("protected:"))
                     {
                         i++;
-                        if(lista[i]!="" && lista[i]!="public:" && lista[i]!="private:")
+                        if (lista[i] != "" && lista[i] != "public:" && lista[i] != "private:")
                         {
                             listaCeva.Add(lista[i]);
                         }
                     }
                     i = j;
-                    foreach(string s in listaCeva)
+                    foreach (string s in listaCeva)
                     {
                         string[] ceva = s.Split(" ");
                         StringBuilder p = new StringBuilder();
@@ -183,382 +183,293 @@ namespace LandingPage.Extensions
                         }
                         param.Add(p.ToString());
                     }
-                    
+
                 }
             }
-            
-                switch(general)
-                {
-                    case "clasa":
-                        {
-                        switch (specific)
-                        {
-                            case "arata tot":
+
+            switch (general)
+            {
+                case "clasa":
+                    switch (specific)
+                    {
+                        case "arata tot":
+                            {
+                                for (int i = 0; i < lista.Count(); i++)
+                                {
+                                    if (lista[i].Contains("class"))
+                                    {
+                                        string[] ceva = lista[i].Split(" ");
+                                        List<string> listaCeva = new List<string>();
+                                        foreach (string s in ceva)
+                                        {
+                                            listaCeva.Add(s);
+                                        }
+                                        for (int increment = 0; increment < listaCeva.Count(); increment++)
+                                        {
+                                            if (listaCeva[increment] == "class")
+                                            {
+                                                numeClase.Add(listaCeva[increment + 1]);
+                                            }
+                                        }
+                                        int j = i;
+                                        while (!lista[j].Contains("};"))
+                                        {
+                                            result.Add(lista[j]);
+                                            j++;
+                                        }
+                                        result.Add("};");
+
+                                    }
+                                }
+                            }
+                            break;
+                        case "destructor":
+                            for (int i = 0; i < lista.Count(); i++)
+                            {
+
+                                if (lista[i].Contains("~") && !lista[i].Contains("void") && lista[i].Contains("()"))
+                                {
+                                    {
+                                        int j = i;
+                                        while (!(lista[j].Contains("delete[]") && lista[j + 1].Contains("}")) && !(lista[j].Contains("throw") && lista[j + 1].Contains("}")))
+                                        {
+                                            result.Add(lista[j]);
+                                            j++;
+                                        }
+                                        result.Add(lista[j]);
+                                        result.Add(lista[j + 1]);
+                                    }
+
+                                }
+                            }
+                            break;
+                        case "constructor cu parametri"://nu merge
+                            {
+                                //constructor cu parametri
+                                foreach (string n in numeClase)
                                 {
                                     for (int i = 0; i < lista.Count(); i++)
                                     {
-                                        if (lista[i].Contains("class"))
+                                        if (lista[i].Contains("()") && !lista[i].Contains("void") && lista[i].Contains(n)
+                                            && !lista[i].Contains("~")
+                                            && !lista[i].Contains("operator=")
+                                            && !lista[i].Contains("operator+")
+                                            && !lista[i].Contains("operator-")
+                                            && !lista[i].Contains("operator*")
+                                            && !lista[i].Contains("operator/")
+                                            && !lista[i].Contains("operator%")
+                                            && !lista[i].Contains("operator^")
+                                            && !lista[i].Contains("operator&")
+                                            && !lista[i].Contains("operator|")
+                                            && !lista[i].Contains("operator~!")
+                                            && !lista[i].Contains("operator,")
+                                            && !lista[i].Contains("operator<")
+                                            && !lista[i].Contains("operator>")
+                                            && !lista[i].Contains("operator<=")
+                                            && !lista[i].Contains("operator>=")
+                                            && !lista[i].Contains("operator++")
+                                            && !lista[i].Contains("operator--")
+                                            && !lista[i].Contains("operator<<")
+                                            && !lista[i].Contains("operator>>")
+                                            && !lista[i].Contains("operator&=")
+                                            && !lista[i].Contains("operator!=")
+                                            && !lista[i].Contains("operator&&")
+                                            && !lista[i].Contains("operator||")
+                                            && !lista[i].Contains("operator+=")
+                                            && !lista[i].Contains("operator-=")
+                                            && !lista[i].Contains("operator[]")
+                                            && !lista[i].Contains("operator()"))
                                         {
-                                            string[] ceva = lista[i].Split(" ");
-                                            List<string> listaCeva = new List<string>();
-                                            foreach (string s in ceva)
                                             {
-                                                listaCeva.Add(s);
-                                            }
-                                            for (int increment = 0; increment < listaCeva.Count(); increment++)
-                                            {
-                                                if (listaCeva[increment] == "class")
+                                                int j = i;
+                                                while (!lista[j].Contains("}"))//(lista[j].Contains("}") && lista[j + 1].Contains("}")))// || !(lista[j].Contains("}") && !lista[j + 1].Contains("}")))
                                                 {
-                                                    numeClase.Add(listaCeva[increment + 1]);
+                                                    result.Add(lista[j]);
+                                                    j++;
+                                                }
+                                                result.Add(lista[j]);
+                                                result.Add(lista[j + 1]);
+                                            }
+                                        }
+                                    }
+
+                                }
+                            }
+                            break;
+                        case "constructor fara parametri"://nu merge
+                            {
+                                //constructor fara parametri
+                                for (int i = 0; i < lista.Count(); i++)
+                                {
+                                    foreach (string n in numeClase)
+                                    {
+                                        if (lista[i].Contains(n) && lista[i].Contains("()") && !lista[i].Contains(":")
+                                            && !lista[i].Contains("operator=")
+                                            && !lista[i].Contains("operator+")
+                                            && !lista[i].Contains("operator-")
+                                            && !lista[i].Contains("operator*")
+                                            && !lista[i].Contains("operator/")
+                                            && !lista[i].Contains("operator%")
+                                            && !lista[i].Contains("operator^")
+                                            && !lista[i].Contains("operator&")
+                                            && !lista[i].Contains("operator|")
+                                            && !lista[i].Contains("operator~!")
+                                            && !lista[i].Contains("operator,")
+                                            && !lista[i].Contains("operator<")
+                                            && !lista[i].Contains("operator>")
+                                            && !lista[i].Contains("operator<=")
+                                            && !lista[i].Contains("operator>=")
+                                            && !lista[i].Contains("operator++")
+                                            && !lista[i].Contains("operator--")
+                                            && !lista[i].Contains("operator<<")
+                                            && !lista[i].Contains("operator>>")
+                                            && !lista[i].Contains("operator&=")
+                                            && !lista[i].Contains("operator!=")
+                                            && !lista[i].Contains("operator&&")
+                                            && !lista[i].Contains("operator||")
+                                            && !lista[i].Contains("operator+=")
+                                            && !lista[i].Contains("operator-=")
+                                && !lista[i].Contains("operator[]")
+                                && !lista[i].Contains("operator()"))
+                                        {
+                                            foreach (string p in param)
+                                            {
+                                                if (lista[i].Contains(p))
+                                                {
+                                                    int j = i;
+                                                    while (!lista[j].Contains("return"))
+                                                    {
+                                                        result.Add(lista[j]);
+                                                        j++;
+                                                    }
+                                                    result.Add(lista[j]);
+                                                    result.Add(lista[j + 1]);
                                                 }
                                             }
-                                            int j = i;
-                                            while (!lista[j].Contains("};"))
-                                            {
-                                                result.Add(lista[j]);
-                                                j++;
-                                            }
-                                            result.Add("};");
-
                                         }
                                     }
                                 }
-                                break;
-                        }
-                            
-                        }
-                        break;
-                    case "destructor":
-                        {
+                            }
+                            break;
+                        case "constructor cu incrementare"://nu merge
+                            {
+                                for (int i = 0; i < lista.Count(); i++)
+                                {
+                                    foreach (string n in numeClase)
+                                    {
+                                        if (lista[i].Contains(n) && lista[i].Contains("(") && lista[i].Contains(")") && lista[i].Contains(":")
+                                            && !lista[i].Contains("operator=")
+                                            && !lista[i].Contains("operator+")
+                                            && !lista[i].Contains("operator-")
+                                            && !lista[i].Contains("operator*")
+                                            && !lista[i].Contains("operator/")
+                                            && !lista[i].Contains("operator%")
+                                            && !lista[i].Contains("operator^")
+                                            && !lista[i].Contains("operator&")
+                                            && !lista[i].Contains("operator|")
+                                            && !lista[i].Contains("operator~!")
+                                            && !lista[i].Contains("operator,")
+                                            && !lista[i].Contains("operator<")
+                                            && !lista[i].Contains("operator>")
+                                            && !lista[i].Contains("operator<=")
+                                            && !lista[i].Contains("operator>=")
+                                            && !lista[i].Contains("operator++")
+                                            && !lista[i].Contains("operator--")
+                                            && !lista[i].Contains("operator<<")
+                                            && !lista[i].Contains("operator>>")
+                                            && !lista[i].Contains("operator&=")
+                                            && !lista[i].Contains("operator!=")
+                                            && !lista[i].Contains("operator&&")
+                                            && !lista[i].Contains("operator||")
+                                            && !lista[i].Contains("operator+=")
+                                            && !lista[i].Contains("operator-=")
+                                && !lista[i].Contains("operator[]")
+                                && !lista[i].Contains("operator()"))
+                                        {
+                                            foreach (string p in param)
+                                            {
+                                                if (lista[i].Contains(p))
+                                                {
+                                                    int j = i;
+                                                    while (!lista[j].Contains("return"))
+                                                    {
+                                                        result.Add(lista[j]);
+                                                        j++;
+                                                    }
+                                                    result.Add(lista[j]);
+                                                    result.Add(lista[j + 1]);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                    }
+                    break;
+
+                case "getter":
+                    {
                         for (int i = 0; i < lista.Count(); i++)
                         {
-                            string destructorPattern = @"^~[A-Za-z0-9]()";
-                            if (Regex.IsMatch(lista[i], destructorPattern))
+                            if (lista[i].Contains("private:"))
                             {
                                 int j = i;
-                                while (!lista[j].Contains("}"))
+                                while (!lista[j].Contains("public:") || !lista[j].Contains("protected:"))
                                 {
                                     result.Add(lista[j]);
                                     j++;
                                 }
-                                result.Add("}");
-
-                            }
-                        }
-                    }
-                        break;
-                    case "constructor":
-                        {
-                        switch (specific)
-                        {
-                            case "cu parametri":
-                                {
-                                    //constructor cu parametri
-                                    for (int i = 0; i < lista.Count(); i++)
-                                    {
-                                        foreach (string n in numeClase)
-                                        {
-                                            if (lista[i].Contains(n) && lista[i].Contains("(") && lista[i].Contains(")") && !lista[i].Contains(":")
-                                                && !lista[i].Contains("operator=")
-                                                && !lista[i].Contains("operator+")
-                                                && !lista[i].Contains("operator-")
-                                                && !lista[i].Contains("operator*")
-                                                && !lista[i].Contains("operator/")
-                                                && !lista[i].Contains("operator%")
-                                                && !lista[i].Contains("operator^")
-                                                && !lista[i].Contains("operator&")
-                                                && !lista[i].Contains("operator|")
-                                                && !lista[i].Contains("operator~!")
-                                                && !lista[i].Contains("operator,")
-                                                && !lista[i].Contains("operator<")
-                                                && !lista[i].Contains("operator>")
-                                                && !lista[i].Contains("operator<=")
-                                                && !lista[i].Contains("operator>=")
-                                                && !lista[i].Contains("operator++")
-                                                && !lista[i].Contains("operator--")
-                                                && !lista[i].Contains("operator<<")
-                                                && !lista[i].Contains("operator>>")
-                                                && !lista[i].Contains("operator&=")
-                                                && !lista[i].Contains("operator!=")
-                                                && !lista[i].Contains("operator&&")
-                                                && !lista[i].Contains("operator||")
-                                                && !lista[i].Contains("operator+=")
-                                                && !lista[i].Contains("operator-=")
-
-                                    && !lista[i].Contains("operator[]")
-                                    && !lista[i].Contains("operator()"))
-                                            {
-                                                foreach (string p in param)
-                                                {
-                                                    if (lista[i].Contains(p))
-                                                    {
-                                                        int j = i;
-                                                        while (!lista[j].Contains("return"))
-                                                        {
-                                                            result.Add(lista[j]);
-                                                            j++;
-                                                        }
-                                                        result.Add(lista[j]);
-                                                        result.Add(lista[j + 1]);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                break;
-                            case "constructor fara parametri":
-                                {
-                                    //constructor fara parametri
-                                    for (int i = 0; i < lista.Count(); i++)
-                                    {
-                                        foreach (string n in numeClase)
-                                        {
-                                            if (lista[i].Contains(n) && lista[i].Contains("()") && !lista[i].Contains(":")
-                                                && !lista[i].Contains("operator=")
-                                                && !lista[i].Contains("operator+")
-                                                && !lista[i].Contains("operator-")
-                                                && !lista[i].Contains("operator*")
-                                                && !lista[i].Contains("operator/")
-                                                && !lista[i].Contains("operator%")
-                                                && !lista[i].Contains("operator^")
-                                                && !lista[i].Contains("operator&")
-                                                && !lista[i].Contains("operator|")
-                                                && !lista[i].Contains("operator~!")
-                                                && !lista[i].Contains("operator,")
-                                                && !lista[i].Contains("operator<")
-                                                && !lista[i].Contains("operator>")
-                                                && !lista[i].Contains("operator<=")
-                                                && !lista[i].Contains("operator>=")
-                                                && !lista[i].Contains("operator++")
-                                                && !lista[i].Contains("operator--")
-                                                && !lista[i].Contains("operator<<")
-                                                && !lista[i].Contains("operator>>")
-                                                && !lista[i].Contains("operator&=")
-                                                && !lista[i].Contains("operator!=")
-                                                && !lista[i].Contains("operator&&")
-                                                && !lista[i].Contains("operator||")
-                                                && !lista[i].Contains("operator+=")
-                                                && !lista[i].Contains("operator-=")
-                                    && !lista[i].Contains("operator[]")
-                                    && !lista[i].Contains("operator()"))
-                                            {
-                                                foreach (string p in param)
-                                                {
-                                                    if (lista[i].Contains(p))
-                                                    {
-                                                        int j = i;
-                                                        while (!lista[j].Contains("return"))
-                                                        {
-                                                            result.Add(lista[j]);
-                                                            j++;
-                                                        }
-                                                        result.Add(lista[j]);
-                                                        result.Add(lista[j + 1]);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                break;
-                            case "constructor cu incrementare":
-                                {
-                                    for (int i = 0; i < lista.Count(); i++)
-                                    {
-                                        foreach (string n in numeClase)
-                                        {
-                                            if (lista[i].Contains(n) && lista[i].Contains("(") && lista[i].Contains(")") && lista[i].Contains(":")
-                                                && !lista[i].Contains("operator=")
-                                                && !lista[i].Contains("operator+")
-                                                && !lista[i].Contains("operator-")
-                                                && !lista[i].Contains("operator*")
-                                                && !lista[i].Contains("operator/")
-                                                && !lista[i].Contains("operator%")
-                                                && !lista[i].Contains("operator^")
-                                                && !lista[i].Contains("operator&")
-                                                && !lista[i].Contains("operator|")
-                                                && !lista[i].Contains("operator~!")
-                                                && !lista[i].Contains("operator,")
-                                                && !lista[i].Contains("operator<")
-                                                && !lista[i].Contains("operator>")
-                                                && !lista[i].Contains("operator<=")
-                                                && !lista[i].Contains("operator>=")
-                                                && !lista[i].Contains("operator++")
-                                                && !lista[i].Contains("operator--")
-                                                && !lista[i].Contains("operator<<")
-                                                && !lista[i].Contains("operator>>")
-                                                && !lista[i].Contains("operator&=")
-                                                && !lista[i].Contains("operator!=")
-                                                && !lista[i].Contains("operator&&")
-                                                && !lista[i].Contains("operator||")
-                                                && !lista[i].Contains("operator+=")
-                                                && !lista[i].Contains("operator-=")
-                                    && !lista[i].Contains("operator[]")
-                                    && !lista[i].Contains("operator()"))
-                                            {
-                                                foreach (string p in param)
-                                                {
-                                                    if (lista[i].Contains(p))
-                                                    {
-                                                        int j = i;
-                                                        while (!lista[j].Contains("return"))
-                                                        {
-                                                            result.Add(lista[j]);
-                                                            j++;
-                                                        }
-                                                        result.Add(lista[j]);
-                                                        result.Add(lista[j + 1]);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                break;
-                        }
-                        //constructor cu de toate ->nu e bun
-                            //for (int i = 0; i < lista.Count(); i++)
-                            //{
-                            //    string destructorPattern = @"^[A-Za-z0-9]([A-Za-z0-9,]*)|[A-Za-z0-9]([A-Za-z0-9,]*):[A-Za-z0-9]([A-Za-z0-9])";
-                            //    if (Regex.IsMatch(lista[i], destructorPattern))
-                            //    {
-                            //        int j = i;
-                            //        while (!lista[j].Contains("}"))
-                            //        {
-                            //            result.Add(lista[j]);
-                            //            j++;
-                            //        }
-                            //        result.Add("}");
-
-                        //    }
-                        //}
-                        }
-                        break;
-                    case "getter":
-                    for (int i = 0; i < lista.Count(); i++)
-                    {
-                        if (lista[i].Contains("private:"))
-                        {
-                            int j = i;
-                            while (!lista[j].Contains("public:") || !lista[j].Contains("protected:"))
-                            {
-                                result.Add(lista[j]);
-                                j++;
                             }
                         }
                     }
                     break;
-                    case "constructor cu incrementare":
-                        
-                        break;
-                    case "operator=":
-                        //for (int i = 0; i < lista.Count(); i++)
-                        //{
-                        //    foreach (string n in numeClase)
-                        //    {
-                        //        if (lista[i].Contains(n) && lista[i].Contains("()") && !lista[i].Contains(":")
-                        //            && lista[i].Contains("operator="))
-                        //        {
-                        //            foreach (string p in param)
-                        //            {
-                        //                if (lista[i].Contains(p))
-                        //                {
-                        //                    int j = i;
-                        //                    while (!lista[j].Contains("return"))
-                        //                    {
-                        //                        result.Add(lista[j]);
-                        //                        j++;
-                        //                    }
-                        //                    result.Add(lista[j]);
-                        //                    result.Add(lista[j + 1]);
-                        //                }
-                        //            }
-                        //        }
-                        //    }
-                        //}
-                        break;
-                }
+                case "operator":
+                    switch (specific)
+                    {
+                        case "==":
+                            verificaOperator(lista, "operator==", "", result);
+                            break;
+                        case "[]":
+                            verificaOperator(lista, "operator[]", "", result);
+                            break;
+                        case "=":
+                            verificaOperator(lista, "operator=", "const", result);
+                            break;
+                        case "!":
+                            verificaOperator(lista, "operator!", "", result);
+                            break;
+                        case "<":
+                            verificaOperator(lista, "operator<", "bool", result);
+                            break;
+                    }
 
-
-
-            //for (int i = 0; i < lista.Count(); i++)
-            //{
-            //    foreach (string n in numeClase)
-            //    {
-            //        if (lista[i].Contains(n) && lista[i].Contains("(") && lista[i].Contains(")") && lista[i].Contains(":")
-            //            && !lista[i].Contains("operator=")
-            //            && !lista[i].Contains("operator+")
-            //            && !lista[i].Contains("operator-")
-            //            && !lista[i].Contains("operator*")
-            //            && !lista[i].Contains("operator/")
-            //            && !lista[i].Contains("operator%")
-            //            && !lista[i].Contains("operator^")
-            //            && !lista[i].Contains("operator&")
-            //            && !lista[i].Contains("operator|")
-            //            && !lista[i].Contains("operator~!")
-            //            && !lista[i].Contains("operator,")
-            //            && !lista[i].Contains("operator<")
-            //            && !lista[i].Contains("operator>")
-            //            && !lista[i].Contains("operator<=")
-            //            && !lista[i].Contains("operator>=")
-            //            && !lista[i].Contains("operator++")
-            //            && !lista[i].Contains("operator--")
-            //            && !lista[i].Contains("operator<<")
-            //            && !lista[i].Contains("operator>>")
-            //            && !lista[i].Contains("operator&=")
-            //            && !lista[i].Contains("operator!=")
-            //            && !lista[i].Contains("operator&&")
-            //            && !lista[i].Contains("operator||")
-            //            && !lista[i].Contains("operator+=")
-            //            && !lista[i].Contains("operator-=")
-            //            && !lista[i].Contains("operator[]")
-            //            && !lista[i].Contains("operator()"))
-            //        {
-            //            foreach (string p in param)
-            //            {
-            //                if (lista[i].Contains(p))
-            //                {
-            //                    int j = i;
-            //                    while (!lista[j].Contains("return"))
-            //                    {
-            //                        result.Add(lista[j]);
-            //                        j++;
-            //                    }
-            //                    //result.Add(lista[j]);
-            //                    //result.Add("}");
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
-
-
-            //for (int i = 0; i < lista.Count(); i++)
-            //{
-            //    if (lista[i].Contains("private:"))
-            //    {
-            //        int j = i;
-            //        while (!lista[j].Contains("public:") || !lista[j].Contains("protected:"))
-            //        {
-            //            result.Add(lista[j]);
-            //            j++;
-            //        }
-            //    }
-            //}
+                    break;
+            }
 
 
             var res = string.Join("\n", result);
             return res;
         }
 
-        //public static string selectQuality(List<string> code, string keywords)
-        //{
-        //    int counter = 0;
-        //    foreach (string s in code)
-        //    {
-        //        counter++;
-        //    }
-        //}
+        public static void verificaOperator(List<string> lista, string specific, string verifAditionala, List<string> result)
+        {
+            for (int i = 0; i < lista.Count(); i++)
+            {
+
+                if (lista[i].Contains(specific) && !lista[i].Contains("void") && lista[i].Contains(verifAditionala))
+                {
+                    int j = i;
+                    while (!(lista[j].Contains("return") && lista[j + 1].Contains("}")) && !(lista[j].Contains("throw") && lista[j + 1].Contains("}")))
+                    {
+                        result.Add(lista[j]);
+                        j++;
+                    }
+                    result.Add(lista[j]);
+                    result.Add(lista[j + 1]);
+
+                }
+            }
+        }
     }
 }

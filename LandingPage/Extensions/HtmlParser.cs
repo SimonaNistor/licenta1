@@ -67,9 +67,14 @@ namespace LandingPage.Extensions
 
         public static string Quality(string k1, string k2)
         {
-            List<string> rezultateCautare = cautare();
+            List<string> listaToateCoduri = new List<string>();
+            List<Resources> listaAlteSurse = new ResourcesManager().GetAll();
+            foreach (Resources res in listaAlteSurse)
+            {
+                listaToateCoduri.Add(res.Code);
+            }
 
-            return QualityTests.detect(rezultateCautare[11], "clasa", "arata tot");
+            return QualityTests.detect(listaToateCoduri[0], k1, k2);
         }
 
         public static List<string> cautare()
@@ -162,17 +167,11 @@ namespace LandingPage.Extensions
             List<double> listResults = new List<double>();
             for (int i=0; i<counter;i++)
             {
-                //if (pointsKeywords[i] >= 0 && pointsLanguage[i] >= 0)
-                //{
                     listResults.Add(Network.MakeExamplePredictions(network, pointsKeywords[i], pointsLanguage[i]));
-                //}
             }
 
             double maxValue = listResults.Max();
             int maxIndex = listResults.IndexOf(maxValue);
-            //var result = values.OrderByDescending(w => w).Take(3);
-            //List<int> results = result.ToList();
-            //return code[results[1]];
             return code[maxIndex];
         }
 
