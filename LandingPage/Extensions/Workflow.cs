@@ -24,6 +24,15 @@ namespace LandingPage.Extensions
             return best;
         }
 
+        public static List<string> executeNextBest()
+        {
+            var x = new SearchesManager().GetAll();
+            var z = new SearchesManager().GetLastEntry();
+            List<string> best = new List<string>();
+            best = HtmlParser.nextBest(z.Keywords);
+            return best;
+        }
+
         public static string getBestScore()
         {
             string y = Workflow.getLastSearchKeywords();

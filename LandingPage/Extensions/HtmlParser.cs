@@ -24,6 +24,13 @@ namespace LandingPage.Extensions
             return selectBestSnippet(rezultateCautare, keywords);
         }
 
+        public static List<string> nextBest(string keywords)
+        {
+            List<string> rezultateCautare = cautare();
+
+            return selectNextBest(rezultateCautare, keywords);
+        }
+
         public static List<double> getStatsFinal(string keywords)
         {
             List<string> rez = cautare();
@@ -34,7 +41,7 @@ namespace LandingPage.Extensions
         {
             List<string> rez = cautare();
             List<double> lista = new List<double>();
-            lista=detectionScores(rez, keywords);
+            lista = detectionScores(rez, keywords);
             double r = lista.Max();
             return r;
         }
@@ -43,8 +50,8 @@ namespace LandingPage.Extensions
         {
             List<string> rezultateCautare = cautare();
 
-            List<int> numere= new List<int>();
-            foreach(string x in rezultateCautare)
+            List<int> numere = new List<int>();
+            foreach (string x in rezultateCautare)
             {
                 numere.Add(KeywordsDetect.detect(x, keywords));
                 //numere += KeywordsDetect.detect(x, keywords);
@@ -87,7 +94,7 @@ namespace LandingPage.Extensions
 
             //get all code from links
             List<string> listaIntermediara = new List<string>();
-            foreach(Links link in listaLinkuri)
+            foreach (Links link in listaLinkuri)
             {
                 listaIntermediara = editareCod(link.link);
                 foreach (String cod in listaIntermediara)
@@ -98,7 +105,7 @@ namespace LandingPage.Extensions
             }
 
             //get all code from bd
-            foreach(Resources res in listaAlteSurse)
+            foreach (Resources res in listaAlteSurse)
             {
                 listaToateCoduri.Add(res.Code);
             }
@@ -146,18 +153,18 @@ namespace LandingPage.Extensions
             return x;
         }
 
-        
+
 
         public static string selectBestSnippet(List<string> code, string keywords)//cu algoritmii
         {
             int counter = 0;
-            foreach(string s in code)
+            foreach (string s in code)
             {
                 counter++;
             }
             List<int> pointsKeywords = new List<int>();
             List<int> pointsLanguage = new List<int>();
-            for(int i=0;i<counter;i++)
+            for (int i = 0; i < counter; i++)
             {
                 pointsKeywords.Add(KeywordsDetect.detect(code[i], keywords));
                 pointsLanguage.Add(LanguageDetect.detect(code[i]));
@@ -165,9 +172,9 @@ namespace LandingPage.Extensions
 
             NeuralNetwork network = Network.Functie();
             List<double> listResults = new List<double>();
-            for (int i=0; i<counter;i++)
+            for (int i = 0; i < counter; i++)
             {
-                    listResults.Add(Network.MakeExamplePredictions(network, pointsKeywords[i], pointsLanguage[i]));
+                listResults.Add(Network.MakeExamplePredictions(network, pointsKeywords[i], pointsLanguage[i]));
             }
 
             double maxValue = listResults.Max();
@@ -194,18 +201,54 @@ namespace LandingPage.Extensions
             List<double> listResults = new List<double>();
             for (int i = 0; i < counter; i++)
             {
-                //if (pointsKeywords[i] >= 0 && pointsLanguage[i] >= 0)
-                //{
                 listResults.Add(Network.MakeExamplePredictions(network, pointsKeywords[i], pointsLanguage[i]));
-                //}
             }
 
             double maxValue = listResults.Max();
             int maxIndex = listResults.IndexOf(maxValue);
-            //var result = values.OrderByDescending(w => w).Take(3);
-            //List<int> results = result.ToList();
-            //return code[results[1]];
             return listResults;
+        }
+
+        public static List<string> selectNextBest(List<string> code, string keywords)//cu algoritmii
+        {
+            Dictionary<string, int> dict = new Dictionary<string, int>();
+            int counter = 0;
+            foreach (string s in code)
+            {
+                counter++;
+            }
+            List<int> pointsKeywords = new List<int>();
+            List<int> pointsLanguage = new List<int>();
+            for (int i = 0; i < counter; i++)
+            {
+                pointsKeywords.Add(KeywordsDetect.detect(code[i], keywords));
+                pointsLanguage.Add(LanguageDetect.detect(code[i]));
+            }
+
+            NeuralNetwork network = Network.Functie();
+            List<double> listResults = new List<double>();
+            for (int i = 0; i < counter; i++)
+            {
+                //listResults.Add(Network.MakeExamplePredictions(network, pointsKeywords[i], pointsLanguage[i]));
+                dict.Add(code[i], (int)Network.MakeExamplePredictions(network, pointsKeywords[i], pointsLanguage[i]));
+            }
+
+            var myList = dict.ToList();
+            myList.Sort((pair1, pair2) => pair1.Value.CompareTo(pair2.Value));
+
+            List<string> listaRez = new List<string>();
+            if(myList.Count()>=4)
+            {
+                listaRez.Add(myList[1].Key);
+                listaRez.Add(myList[2].Key);
+                listaRez.Add(myList[3].Key);
+
+            }
+            
+
+            //double maxValue = listResults.Max();
+            //int maxIndex = listResults.IndexOf(maxValue);
+            return listaRez;// code[maxIndex];
         }
     }
 }
