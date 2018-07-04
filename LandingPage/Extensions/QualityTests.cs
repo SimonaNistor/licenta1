@@ -442,6 +442,39 @@ namespace LandingPage.Extensions
                         case "<":
                             verificaOperator(lista, "operator<", "bool", result);
                             break;
+                        case "+":
+                            verificaOperator(lista, "operator+", "", result);
+                            break;
+                        case "++":
+                            verificaOperator(lista, "operator++", "", result);
+                            break;
+                        case "-":
+                            verificaOperator(lista, "operator-", "", result);
+                            break;
+                        case "--":
+                            verificaOperator(lista, "operator--", "", result);
+                            break;
+                        case "*":
+                            verificaOperator(lista, "operator*", "", result);
+                            break;
+                        case "/":
+                            verificaOperator(lista, "operator/", "", result);
+                            break;
+                        case ">":
+                            verificaOperator(lista, "operator>", "", result);
+                            break;
+                        case ">>":
+                            verificaOperator(lista, "operator>>", "", result);
+                            break;
+                        case ">=":
+                            verificaOperator(lista, "operator>=", "", result);
+                            break;
+                        case "<<":
+                            verificaOperator(lista, "operator<<", "", result);
+                            break;
+                        case "<=":
+                            verificaOperator(lista, "operator<=", "", result);
+                            break;
                     }
 
                     break;

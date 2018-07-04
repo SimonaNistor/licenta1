@@ -62,6 +62,7 @@ namespace LandingPage.Extensions
             constructor.Add("destructor", -10);
             constructor.Add("()", 1);
             constructorCu.Add("constructor fara parametri", 50);
+            constructorCu.Add("()", 20);
             constructorFara.Add("constructor cu parametri", 50);
             constructorCopiere.Add("constructor de copiere", 50);
             constructorCopiere.Add("&", 1);
