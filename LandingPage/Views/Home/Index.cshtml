@@ -17,6 +17,8 @@
     <meta name=”title” content=”Licenta”>
     <meta name="description" content="App web">
     <meta name="keywords" content="Licenta, automatizare, AI, IA">
+    @*<link href="~/css/prism.css" rel="stylesheet" />*@
+    <link href="~/css/prism-vs.css" rel="stylesheet" />
 </head>
 <!--Preload-->
 <div class="preloader">
@@ -98,8 +100,8 @@
 
 <div class="afisareCodContainer">
     <div class="container">
-        <pre>
-        <code>
+        <pre class="line-numbers">
+        <code class="language-c" >
             @Workflow.execute()
         </code>
         </pre>
@@ -279,9 +281,9 @@
     <div class="container">
         <div class="row">
             <div class="section-title text-center">
-                    <h2>Rezultate alternative pentru cautare</h2>
-                    <p>*ceva*</p>
-                </div>
+                <h2>Rezultate alternative pentru cautare</h2>
+                <p>*ceva*</p>
+            </div>
         </div>
         <div class="row">
             <div class="col-xs-12 col-lg-8 col-lg-offset-2">
@@ -291,10 +293,10 @@
                         listaNextBest = Workflow.executeNextBest();
                         foreach (string s in listaNextBest)
                         {
-                            
-                                <code>
-                                    @s
-                                </code>
+
+                            <code>
+                                @s
+                            </code>
                         }
                     }
                 </div>
@@ -566,7 +568,7 @@
     <div class="container">
         <div class="row">
             <div class="section-title text-center">
-                <h2>Salveaza</h2>
+                <h2>Salvare</h2>
                 <p>Salveaza segmente de cod pentru a le accesa cu mai multa usurinta la viitoarele utilizari ale aplicatiei!</p>
             </div>
         </div>
@@ -633,6 +635,8 @@
 <script type="text/javascript" src="https://maps.google.com/maps/api/js?js?sensor=false&key=AIzaSyDkpD0-hjaAUydUfLOlXKKqInB64EqyCBo"></script>
 <script src="~/js/script.js"></script>
 <script src="~/js/prism.js"></script>
+<script type="text/javascript" src="components/prism-core.min.js"></script>
+<script type="text/javascript" src="components/prism-clike.min.js"></script>
 <script src="~/js/require.js"></script>
 <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.1.0.min.js"></script>
 
@@ -709,6 +713,7 @@
 
     function incarcareChart() {
 
+        /////////////////////////////////
         var k;
         var l;
         var final;

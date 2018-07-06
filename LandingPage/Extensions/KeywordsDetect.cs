@@ -191,16 +191,6 @@ namespace LandingPage.Extensions
                 }
             }
 
-            //string[] code = snippet.Split(delimiters);
-            //List<string> lista = new List<string>();
-            //foreach(string s in code)
-            //{
-            //    if(s!="")
-            //    {
-            //        lista.Add(s);
-            //    }
-            //}
-
             string[] keys = keywords.Split('@');
             List<string> keysList = new List<string>();
             foreach (string k in keys)
@@ -238,10 +228,6 @@ namespace LandingPage.Extensions
                     {
                         points += value;
                     }
-                    //if (x == key)
-                    //{
-                    //    points += value;
-                    //}
                 }
             }
             return points;
@@ -258,10 +244,6 @@ namespace LandingPage.Extensions
                 {
                     points += value;
                 }
-                //if (x == key)
-                //{
-                //    points += value;
-                //}
             }
             return points;
         }

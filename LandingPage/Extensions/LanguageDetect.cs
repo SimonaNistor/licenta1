@@ -48,7 +48,7 @@ namespace LandingPage.Extensions
             // JS variable declaration
             C.Add("var", -1);
             ///////////////////////////////////////////////////////
-            // Primitive variable declaration.
+            // Primitive variable declaration
             CPlusPlus.Add("char", 2);
             CPlusPlus.Add("long", 2);
             CPlusPlus.Add("int", 2);
@@ -56,48 +56,46 @@ namespace LandingPage.Extensions
             CPlusPlus.Add("double", 2);
             //// #include <whatever.h>
             CPlusPlus.Add("#include", 2);
-            //// using namespace something
+            // using namespace something
             CPlusPlus.Add("using", 2);
             CPlusPlus.Add("namespace", 2);
-            //// template declaration
+            // template declaration
             CPlusPlus.Add("template", 2);
-            //// std
+            // std
             CPlusPlus.Add("std", 2);
-            //// cout/cin/endl
+            // cout/cin/endl
             CPlusPlus.Add("cin", 2);
             CPlusPlus.Add("cout", 2);
             CPlusPlus.Add("endl", 2);
-            //// Visibility specifiers
+            // Visibility specifiers
             CPlusPlus.Add("private", 2);
             CPlusPlus.Add("public", 2);
             CPlusPlus.Add("protected", 2);
-            //// nullptr
+            // nullptr
             CPlusPlus.Add("nullptr", 2);
             //// new Keyword
             CPlusPlus.Add("new", 1);
-            //// #define macro
+            // #define macro
             CPlusPlus.Add("#define", 1);
-            //// class keyword
+            // class keyword
             CPlusPlus.Add("class", 1);
-            //// void keyword
+            // void keyword
             CPlusPlus.Add("void", 1);
-            //// (else )if statement
+            // (else )if statement
             CPlusPlus.Add("if", 1);
             CPlusPlus.Add("else", 1);
-            //// while loop
+            // while loop
             CPlusPlus.Add("while", 1);
-            //// Scope operator
-            ///////////////////////////////////nu stiu daca sa pun CPlusPlus.Add("::", 1);
-            //// Java List/ArrayList
+            // Java List/ArrayList
             CPlusPlus.Add("ArrayList<>()", -1);
             ///////////////////////////////////////////////////////
-            Javascript.Add("undefined", 2);
+            Javascript.Add("undefined", -50);
             ///////////////////////////////////////////////////////
-            Python.Add("def", 2);
+            Python.Add("def", -50);
             ///////////////////////////////////////////////////////
-            Java.Add("System", 2);
+            Java.Add("System", -50);
             ///////////////////////////////////////////////////////
-            HTML.Add("!DOCTYPE", 2);
+            HTML.Add("!DOCTYPE", -50);
             ///////////////////////////////////////////////////////
             CSS.Add("style", -50);
         }
