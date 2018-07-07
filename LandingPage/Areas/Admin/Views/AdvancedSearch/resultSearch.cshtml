@@ -4,6 +4,10 @@
     Layout = "~/Areas/Admin/Views/AdvancedSearch/_Layout.cshtml";
 }
 
+<head>
+    <link href="~/css/prism.css" rel="stylesheet" />
+</head>
+
 <div class="afisareButon"></div>
 <div id="wrapper">
     <button onclick="closeTab()" value="BACK" class="btn btn-primary ui submit button">Go Back</button>
@@ -12,8 +16,8 @@
 
 <div class="afisareCodContainer">
     <div class="container">
-        <pre>
-        <code>
+        <pre class="line-numbers language-markup">@*line-numbers*@ 
+        <code class="language-cpp">
             @ViewBag.result
         </code>
         </pre>
@@ -24,14 +28,17 @@
     <button onclick="closeTab()" value="BACK" class="btn btn-primary ui submit button">Go Back</button>
 </div>
 
+<script src="~/js/prism.js"></script>
 
 <style>
-    .afisareCodContainer{
-        margin-top:5%;
+    .afisareCodContainer {
+        margin-top: 5%;
     }
-    .afisareButon{
-        margin-top:5%;
+
+    .afisareButon {
+        margin-top: 5%;
     }
+
     #wrapper {
         display: flex;
         justify-content: center;

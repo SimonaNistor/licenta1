@@ -81,7 +81,9 @@ namespace LandingPage.Extensions
                 listaToateCoduri.Add(res.Code);
             }
 
-            return QualityTests.detect(listaToateCoduri[0], k1, k2);
+            var x = listaToateCoduri.Aggregate("", (max, cur) => max.Length > cur.Length ? max : cur);
+
+            return QualityTests.detect(x, k1, k2);
         }
 
         public static List<string> cautare()
@@ -239,10 +241,9 @@ namespace LandingPage.Extensions
             List<string> listaRez = new List<string>();
             if(myList.Count()>=4)
             {
-                listaRez.Add(myList[1].Key);
-                listaRez.Add(myList[2].Key);
-                listaRez.Add(myList[3].Key);
-
+                listaRez.Add(myList[myList.Count()-1].Key);
+                listaRez.Add(myList[myList.Count() - 2].Key);
+                listaRez.Add(myList[myList.Count() - 3].Key);
             }
             
 

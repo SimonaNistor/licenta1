@@ -8,6 +8,7 @@
     //var listReviews = Model.Where(obj => obj.Id == 40).First().CMSDetails;
     //var listVideos = Model.Where(obj => obj.Id == 36).First().CMSDetails;
     //var listPrices = Model.Where(obj => obj.Id == 43).First().CMSDetails;
+
 }
 
 
@@ -18,7 +19,8 @@
     <meta name="description" content="App web">
     <meta name="keywords" content="Licenta, automatizare, AI, IA">
     @*<link href="~/css/prism.css" rel="stylesheet" />*@
-    <link href="~/css/prism-vs.css" rel="stylesheet" />
+    <link href="~/css/prism.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="themes/plugins/prism-line-numbers.css" />*@
 </head>
 <!--Preload-->
 <div class="preloader">
@@ -33,7 +35,6 @@
 
 <div id="home" class="banner" style="">
     <div class="overlay"></div>
-    @*<div class="curve"></div>*@
     <div class="banner-caption">
         <section class="section-spacing" id="cautare">
             <div class="container">
@@ -51,7 +52,6 @@
                                     <input method="post" type="text" class="form-control ui" id="searchBar" placeholder="Keyword1@Keyword2" name="searchBar" />
                                     <div class="help-block with-errors"></div>
                                     <span class="input-group-addon">
-                                        @*<input class="btn btn-primary" value="SEARCH" onclick="search()">*@
                                         <button onclick="search()" value="SEARCH" class="btn btn-primary ui submit button">Search</button>
                                     </span>
 
@@ -78,7 +78,10 @@
         </div>
         <div class="col-xs-6" id="numar">
             <div class="section-title text-center">
-                <h2>@Workflow.getCurrentSearch()</h2>
+                @{
+                    var numeCautare = Workflow.getCurrentSearch();
+                    <h2>@numeCautare</h2>
+                }
             </div>
         </div>
         <div class="col-xs-6" id="maxValueFinal">
@@ -100,193 +103,44 @@
 
 <div class="afisareCodContainer">
     <div class="container">
-        <pre class="line-numbers">
-        <code class="language-c" >
+        <pre class="line-numbers language-markup">@*line-numbers*@ 
+        <code class="language-cpp">
             @Workflow.execute()
         </code>
         </pre>
     </div>
 </div>
 
-
-<div>
-    @*<p>@HtmlParser.Quality("clasa", "arata tot")</p>
-        <p>@KeywordsDetect.detect(@HtmlParser.Nou("javascript@CSS"), "javascript@CSS")</p>
-        <p>@LanguageDetect.detect(@HtmlParser.Nou("javascript@CSS"))</p>*@
-    @*<p>@PythonScriptHelper.PatchParameter()</p>*@
-    @*<p>@PythonScriptHelper.Incercare()</p>*@
-    @*<p>(-18, 53) - @Network.Functie1(-18, 53) </p>*@
-    @*<p>(32, 59) - @Network.Functie1(32, 59)</p>
-        <p>(106, 53) - @Network.Functie1(106, 53)</p>
-        <p>(106, 63) - @Network.Functie1(106, 63)</p>*@
-    @*<p>(96, 59) - @Network.Functie1(96, 59)</p>*@
-</div>
-<!-- end banner -->
-
-
+<section class="section-title"></section>
 
 <section class="section-spacing" id="advanced">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
-            <div class="col-xs-4">
-                <div class="features-wrapper">
-                    <ul class="icon-right">
-                        <li class="wow fadeInLeft" data-wow-delay="0.2s">
-                            <div class="feature-info">
-                                <h4>Cautare dupa alte criterii</h4>
-                                <p>*descriere*</p>
-                            </div>
-                        </li>
-                    </ul>
+            <div class="col-xs-6">
+                <div class="caption-thumb text-center">
+                    <h1>Căutare după alte criterii</h1>
+                    <p>Alege din lista de căutări posibile pentru a accesa exemple concrete de cod în C++.</p>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="caption-thumb text-center">
+                    <button onclick="myFunction()" class="btn btn-default">CAUTARE AVANSATA</button>
                 </div>
             </div>
         </div>
-        <button onclick="myFunction()" class="btn btn-primary ui submit button">CAUTARE AVANSATA</button>
-    </div>
 </section>
 
-
-<section class="section-spacing" id="features">
+<section class="section-spacing" id="alternative">
     <div class="container">
         <div class="row">
             <div class="section-title text-center">
-                @*<h2>@HtmlHelperForView.ViewHelper(Model, 41, "HeaderDescription")</h2>
-                    <p>@HtmlHelperForView.ViewHelper(Model, 41, "HeaderSubtitle")</p>*@
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-12 col-md-4">
-                <div class="features-wrapper">
-                    <ul class="icon-right">
-                        <li class="wow fadeInLeft" data-wow-delay="0.2s">
-                            <div class="feature-icon">
-                                @*<i class="icon-speedometer"> <img src="@HtmlHelperForView.ViewHelper(Model, 41,"Section1Image")" alt="Section1Image"/> </i>*@
-
-                            </div>
-                            <div class="feature-info">
-                                @*<h4>@HtmlHelperForView.ViewHelper(Model, 41, "Section1Title")</h4>
-                                    <p>@HtmlHelperForView.ViewHelper(Model, 41, "Section1Content")</p>*@
-                            </div>
-                        </li>
-                        @*<li class="wow fadeInLeft" data-wow-delay="0.4s">
-                                <div class="feature-icon">
-                                    <i class="icon-layers"><img src="@HtmlHelperForView.ViewHelper(Model, 41,"Section2Image")" alt="Section2Image"/></i>
-                                </div>
-                                <div class="feature-info">
-                                    <h4>@HtmlHelperForView.ViewHelper(Model, 41, "Section2Title")</h4>
-                                    <p>@HtmlHelperForView.ViewHelper(Model, 41, "Section2Content")</p>
-                                </div>
-                            </li>
-                            <li class="wow fadeInLeft" data-wow-delay="0.6s">
-                                <div class="feature-icon">
-                                    <i class="icon-heart"><img src="@HtmlHelperForView.ViewHelper(Model, 41,"Section3Image")" alt="Section3Image" /></i>
-                                </div>
-                                <div class="feature-info">
-                                    <h4>@HtmlHelperForView.ViewHelper(Model, 41, "Section3Title")</h4>
-                                    <p>@HtmlHelperForView.ViewHelper(Model, 41, "Section3Content")</p>
-                                </div>
-                            </li>*@
-                    </ul>
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-md-4">
-                <div class="features-thumb text-center wow fadeInUp" data-wow-delay="0.6s">
-                    @*<img src="@HtmlHelperForView.ViewHelper(Model, 41,"FeatureMainImage")" alt="FeatureMainImage">*@
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-md-4">
-                <div class="features-wrapper">
-                    @*<ul class="icon-left">
-                            <li class="wow fadeInRight" data-wow-delay="0.2s">
-                                <div class="feature-icon">
-                                    <i class="icon-tools"><img src="@HtmlHelperForView.ViewHelper(Model, 41,"Section4Image")" alt="Section4Image"/></i>
-                                </div>
-                                <div class="feature-info">
-                                    <h4>@HtmlHelperForView.ViewHelper(Model, 41, "Section4Title")</h4>
-                                    <p>@HtmlHelperForView.ViewHelper(Model, 41, "Section4Content")</p>
-                                </div>
-                            </li>
-                            <li class="wow fadeInRight" data-wow-delay="0.4s">
-                                <div class="feature-icon">
-                                    <i class="icon-hotairballoon"><img src="@HtmlHelperForView.ViewHelper(Model, 41,"Section5Image")" alt="Section5Image"/></i>
-                                </div>
-                                <div class="feature-info">
-                                    <h4>@HtmlHelperForView.ViewHelper(Model, 41, "Section5Title")</h4>
-                                    <p>@HtmlHelperForView.ViewHelper(Model, 41, "Section5Content")</p>
-                                </div>
-                            </li>
-                            <li class="wow fadeInRight" data-wow-delay="0.6s">
-                                <div class="feature-icon">
-                                    <i class="icon-chat"><img src="@HtmlHelperForView.ViewHelper(Model, 41,"Section6Image")" alt="Section6Image"/></i>
-                                </div>
-                                <div class="feature-info">
-                                    <h4>@HtmlHelperForView.ViewHelper(Model, 41, "Section6Title")</h4>
-                                    <p>@HtmlHelperForView.ViewHelper(Model, 41, "Section6Content")</p>
-                                </div>
-                            </li>
-                        </ul>*@
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-<!-- end features -->
-
-<section id="fun-facts" class="section-spacing bg-img" style="">
-    <div class="overlay"></div>
-    @*<div class="container">
-            <div class="row">
-                <div class="col-xs-6 col-sm-3">
-                    <div class="service-info wow fadeIn">
-                        <i class="icon-download"><img src="@HtmlHelperForView.ViewHelper(Model, 41,"DownloadsIcon")" alt="DownloadsIcon"/></i>
-                        <span class="counter">@HtmlHelperForView.ViewHelper(Model, 36, "DownloadsNumber")</span><h5>@HtmlHelperForView.ViewHelper(Model, 36, "Downloads")</h5>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-3">
-                    <div class="service-info wow fadeIn">
-                        <i class="icon-happy"><img src="@HtmlHelperForView.ViewHelper(Model, 41,"HappyIcon")" alt="HappyIcon"/></i>
-                        <span class="counter">@HtmlHelperForView.ViewHelper(Model, 36, "HappyNumber")</span><h5>@HtmlHelperForView.ViewHelper(Model, 36, "Happy")</h5>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-3">
-                    <div class="service-info wow fadeIn">
-                        <i class="icon-trophy"><img src="@HtmlHelperForView.ViewHelper(Model, 41,"AwardsIcon")" alt="AwardsIcon"/></i>
-                        <span class="counter">@HtmlHelperForView.ViewHelper(Model, 36, "AwardsNumber")</span><h5>@HtmlHelperForView.ViewHelper(Model, 36, "Awards")</h5>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-3">
-                    <div class="service-info wow fadeIn">
-                        <i class="icon-wine"><img src="@HtmlHelperForView.ViewHelper(Model, 41,"CoffeeIcon")" alt="CoffeeIcon"/></i>
-                        <span class="counter">@HtmlHelperForView.ViewHelper(Model, 36, "CoffeeNumber")</span><h5>@HtmlHelperForView.ViewHelper(Model, 36, "Coffee")</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="img-block text-center wow fadeInUp">
-                        <img src="@HtmlHelperForView.ViewHelper(Model, 36, "FunFactsImg")" alt="FunFactsImg">
-                    </div>
-                </div>
-            </div>
-        </div>*@
-</section>
-<!-- end fun facts -->
-
-<section class="section-spacing" id="screenshots">
-    <div class="container">
-        <div class="row">
-            <div class="section-title text-center">
-                <h2>Rezultate alternative pentru cautare</h2>
-                <p>*ceva*</p>
+                <h2>Rezultate alternative pentru căutare</h2>
+                <p>Vizualizează și utilizează variante alternative pentru căutarea efectuată.</p>
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+            <div class="container">
                 <div class="screenshot-carousel" data-carousel-3d>
                     @{
                         List<string> listaNextBest = new List<string>();
@@ -294,7 +148,7 @@
                         foreach (string s in listaNextBest)
                         {
 
-                            <code>
+                            <code class="language-cpp">
                                 @s
                             </code>
                         }
@@ -304,170 +158,7 @@
         </div>
     </div>
 </section>
-<!-- end screenshots -->
 
-<section id="downloads" class="section-spacing bg-img" style="">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-6">
-                <div class="img-block  wow fadeInLeft">
-                    @*<img src='@HtmlHelperForView.ViewHelper(Model, 45, "Get the app Img")' alt="Get the app Img" />*@
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-6">
-                @*<div class="download-info wow fadeInRight">
-                        <h3>@HtmlHelperForView.ViewHelper(Model, 45, "Get the app HeaderDescription")</h3>
-                        <p>@HtmlHelperForView.ViewHelper(Model, 45, "Get the app HeaderSubtitle")</p>
-                        <a href="#" class="btn btn-default"><span><i class="fa fa-apple"></i> @HtmlHelperForView.ViewHelper(Model, 36, "App Store")</span></a>
-                        <a href="#" class="btn btn-default"><span><i class="fa fa-android"></i>@HtmlHelperForView.ViewHelper(Model, 36, "Google Play")</span></a>
-                    </div>*@
-            </div>
-        </div>
-    </div>
-</section>
-<!-- end fun facts -->
-
-<section class="section-spacing" id="team">
-    <div class="container">
-        <div class="row">
-            <div class="section-title text-center">
-                @*<h2>@HtmlHelperForView.ViewHelper(Model, 39, "HeaderDescription")</h2>
-                    <p>@HtmlHelperForView.ViewHelper(Model, 39, "HeaderSubtitle")</p>*@
-            </div>
-        </div>
-        @{
-            //var memberName = HtmlHelperForView.ImageViewHelper(Model, 1, 39, "MemberName");
-            //var memberImage = HtmlHelperForView.ImageViewHelper(Model, 4, 39, "MemberImage");
-            //var memberSocialMediaFacebook = HtmlHelperForView.ImageViewHelper(Model, 1, 39, "MemberSocialMediaFacebook");
-
-        }
-
-
-
-        <div class="row">
-
-            <div class="col-xs-12">
-                <div class="owl-carousel" id="member-carousel">
-                    @*@foreach (var item in listCmsDetails.Where(x => x.Name == "MemberName"))
-                        {
-                            var _OrderIndex = item.OrderIndex;
-                            <div class="team-member">
-                                <div class="team-member wow fadeIn">
-                                    <div class="team-thumb">
-
-                                        <img src="@HtmlHelperForView.ImageViewHelper(listCmsDetails, 1, _OrderIndex, "MemberImage")" alt="MemberImage">
-
-                                        <div class="contact-bio">
-                                            <ul>
-
-                                                <li><a href="@HtmlHelperForView.ImageViewHelper(listCmsDetails, 1, _OrderIndex, "MemberSocialMediaFacebook")"><i class="fa fa-facebook"></i></a></li>
-
-                                                <li><a href="@HtmlHelperForView.ImageViewHelper(listCmsDetails, 1, _OrderIndex, "MemberSocialMediaTwitter")"><i class="fa fa-twitter"></i></a></li>
-
-                                                <li><a href="@HtmlHelperForView.ImageViewHelper(listCmsDetails, 1, _OrderIndex, "MemberSocialMediaLinkedin")"><i class="fa fa-linkedin"></i></a></li>
-
-                                                <li><a href="@HtmlHelperForView.ImageViewHelper(listCmsDetails, 1, _OrderIndex, "MemberSocialMediaInstagram")"><i class="fa fa-instagram"></i></a></li>
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <h5>@HtmlHelperForView.ImageViewHelper(listCmsDetails, 1, _OrderIndex, "MemberName")</h5>
-                            </div>
-                        }*@
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-<!-- end team -->
-
-<section id="video" class="section-spacing bg-img">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            @*<div id="video-carousel" class="carousel slide" data-ride="carousel" data-pause="false">
-                    <div class="carousel-inner">
-                        @foreach (var video in listVideos.Where(x => x.Name == "Video"))
-                        {
-                            var _OrderIndex = video.OrderIndex;
-                            var activeVideo = listVideos.Where(x => x.Name == "Video").Min(x => x.OrderIndex) == video.OrderIndex ? "active" : "";
-                            <div class="item text-center @activeVideo">
-                                <div class="col-xs-6">
-                                    <div class="play-button text-center">
-                                        <a href="#" data-toggle="modal" data-target="#video-modal-@_OrderIndex"><i class="icon-video"></i></a>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="download-info fadeInRight">
-                                        <h3>@HtmlHelperForView.ImageViewHelper(listVideos, 1, _OrderIndex, "VideoTitle")</h3>
-                                        <p>@HtmlHelperForView.ImageViewHelper(listVideos, 2, _OrderIndex, "VideoDescription")</p>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                    <ol class="video-carousel-indicators">
-                        @{
-                            var countVideos = listVideos.Where(x => x.Name == "Video").Count();
-                            for (int i = 0; i < countVideos; i++)
-                            {
-                                var active = i == 0 ? "active" : "";
-                                <li data-target="#video-carousel" data-slide-to="@i" class="@active"></li>
-                            }
-                        }
-                    </ol>
-                </div>*@
-        </div>
-    </div>
-</section>
-
-
-<!-- end fun facts -->
-
-<section class="section-spacing" id="pricing">
-    @*<div class="container">
-            <div class="row">
-                <div class="section-title text-center">
-                    <h2>@HtmlHelperForView.ViewHelper(Model, 43, "HeaderDescription")</h2>
-                    <p>@HtmlHelperForView.ViewHelper(Model, 43, "HeaderSubtitle")</p>
-                </div>
-            </div>
-            <div class="row">
-                @foreach (var price in listPrices.Where(x => x.Name == "Prices"))
-                {
-                    var _OrderIndex = price.OrderIndex;
-                <div class="col-xs-12 col-sm-4">
-
-
-                    <div class="price-table text-center">
-
-
-                            <div class="pricing-header">
-                                <h3>@HtmlHelperForView.ImageViewHelper(listPrices, 1, _OrderIndex, "Prices")</h3>
-                                <h4>@HtmlHelperForView.ImageViewHelper(listPrices, 1, _OrderIndex, "Money")</h4>
-                            </div>
-                            <ul class="pricing-list">
-                                @foreach(var item in HtmlHelperForView.ImageViewHelper(listPrices, 1, _OrderIndex, "Features").Split(';'))
-                                {
-                                    <li>@item</li>
-                                }
-                                </ul>
-                        <div class="offer-action">
-                            <a href="#" class="btn btn-primary">
-                                <span>@HtmlHelperForView.ViewHelper(Model, 43, "Button")</span>
-                            </a>
-                        </div>
-
-                    </div>
-                </div>
-                }
-            </div>
-        </div>*@
-</section>
-<!-- end pricing -->
 
 <section id="subscription" class="section-spacing bg-img" style="">
     <div class="overlay"></div>
@@ -475,19 +166,13 @@
         <div class="row">
             <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
                 <div class="subscribe-content text-center">
-                    @*<h2>@HtmlHelperForView.ViewHelper(Model, 36, "Subscribe HeaderDescription")</h2>
-                        <p>@HtmlHelperForView.ViewHelper(Model, 36, "Subscribe HeaderSubtitle")</p>*@
                     <form action="#" method="post" id="newsletterForm">
                         <div class="input-group">
                             <input type="email" class="form-control ui email" id="newsletterUser" placeholder="Email Address" required data-error="Please enter your valid email address" name="newsletterUser" />
                             <div class="help-block with-errors"></div>
                             <span class="input-group-addon">
-                                @*//ASTA NU*@@*<input placeholder="Email Address" id="email" class="form-control ui email" name="email" type="email" required data-error="Please enter your valid email address">*@
                                 <input class="btn btn-primary" value="subscribe" onclick="createUser()">
-                                @*<button onclick="createUser()" value="Submit" name="submit" class="btn btn-primary ui submit button">Submit</button>*@
-
                             </span>
-
                         </div>
                         <div id="NewsletterMessageId"> </div>
                     </form>
@@ -496,80 +181,13 @@
         </div>
     </div>
 </section>
-<!-- end subscription -->
-
-
-<section class="section-spacing" id="reviews">
-    <div class="container">
-        <div class="row">
-            <div class="section-title text-center">
-                @*<h2>@HtmlHelperForView.ViewHelper(Model, 40, "HeaderDescription")</h2>
-                    <p>@HtmlHelperForView.ViewHelper(Model, 40, "HeaderSubtitle")</p>*@
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-md-8 col-md-offset-2">
-                <div id="testimonials-carousel" class="carousel slide" data-ride="carousel" data-pause="false">
-
-                    <div class="carousel-inner">
-
-                        @*<p>@Workflow.executeNextBest()</p>
-                            @{
-                                List<string> listaNextBest = new List<string>();
-                                listaNextBest = Workflow.executeNextBest();
-                            }
-                                @foreach (var item in listReviews.Where(x => x.Name == "Review"))
-                                {
-                                    var _OrderIndex = item.OrderIndex;
-                                    var active = listReviews.Where(x => x.Name == "Review").Min(x => x.OrderIndex) == item.OrderIndex ? "active" : "";
-
-                                    <div class="item text-center bg-img @active" style="">
-                                        <div class="overlay"></div>
-                                        <div class="user-img">
-                                            <img src="@HtmlHelperForView.ImageViewHelper(listReviews, 4, _OrderIndex, "ReviewImage")" alt="ReviewImage">
-                                        </div>
-                                        <div class="tesimonial-text">
-                                            <p>@HtmlHelperForView.ImageViewHelper(listReviews, 2, _OrderIndex, "Review")</p>
-                                            <h5>@HtmlHelperForView.ImageViewHelper(listReviews, 1, _OrderIndex, "ReviewAuthor")</h5>
-                                            <div class="ratting">
-                                                @{
-                                                    int stars = Convert.ToInt32(HtmlHelperForView.ImageViewHelper(listReviews, 1, _OrderIndex, "ReviewStars"));
-                                                    for (int i = 0; i < stars; i++)
-                                                    {
-                                                        <i class="fa fa-star"></i>
-                                                    }
-                                                }
-                                            </div>
-                                        </div>
-                                    </div>
-                                }*@
-                    </div>
-                    <ol class="video-carousel-indicators">
-                        @*@{
-                                var count = listReviews.Where(x => x.Name == "Review").Count();
-                                for (int i = 0; i < count; i++)
-                                {
-                                    var active = i == 0 ? "active" : "";
-                                    <li data-target="#testimonials-carousel" data-slide-to="@i" class="@active"></li>
-                                }
-                            }*@
-                    </ol>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- end pricing -->
-
 
 <section class="section-spacing" id="salveaza">
     <div class="container">
         <div class="row">
             <div class="section-title text-center">
                 <h2>Salvare</h2>
-                <p>Salveaza segmente de cod pentru a le accesa cu mai multa usurinta la viitoarele utilizari ale aplicatiei!</p>
+                <p>Salvează segmente de cod corecte pentru a ajuta la îmbunătățirea aplicației!</p>
             </div>
         </div>
 
@@ -613,7 +231,7 @@
         </div>
     </div>
 </section>
-<!-- Bact to top -->
+
 <div class="back-top">
     <a href="#"><i class="fa fa-angle-up"></i></a>
 </div>
@@ -640,30 +258,6 @@
 <script src="~/js/require.js"></script>
 <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.1.0.min.js"></script>
 
-@*<script>
-    $(document).ready(function () {
-        initialize();
-    });
-    function initialize() {
-        var mapOptions = {
-            zoom: 10,
-            scrollwheel: false,
-            center: new google.maps.LatLng(@HtmlHelperForView.ViewHelper(Model, 36, "Latitude"), @HtmlHelperForView.ViewHelper(Model, 36, "Longitude")),
-            styles: [{ "featureType": "administrative", "elementType": "labels.text.fill", "stylers": [{ "color": "#444444" }] }, { "featureType": "administrative.locality", "elementType": "labels.text.stroke", "stylers": [{ "visibility": "on" }] }, { "featureType": "administrative.locality", "elementType": "labels.icon", "stylers": [{ "visibility": "on" }, { "color": "#f1c40f" }] }, { "featureType": "landscape", "elementType": "all", "stylers": [{ "color": "#f2f2f2" }] }, { "featureType": "poi", "elementType": "all", "stylers": [{ "visibility": "off" }] }, { "featureType": "road", "elementType": "all", "stylers": [{ "saturation": -100 }, { "lightness": 45 }] }, { "featureType": "road.highway", "elementType": "all", "stylers": [{ "visibility": "simplified" }] }, { "featureType": "road.arterial", "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] }, { "featureType": "transit", "elementType": "all", "stylers": [{ "visibility": "off" }] }, { "featureType": "water", "elementType": "all", "stylers": [{ "color": "#118AB2" }, { "visibility": "on" }] }]
-        };
-
-        var map = new google.maps.Map(document.getElementById('map'),
-            mapOptions);
-        var marker = new google.maps.Marker({
-            position: map.getCenter(),
-            animation: google.maps.Animation.BOUNCE,
-            icon: '/img/map-marker.png',
-            map: map
-        });
-    }
-    google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
-*@
 
 <style>
     #chart {
@@ -673,6 +267,14 @@
     #wrapper {
         display: flex;
         justify-content: center;
+    }
+
+    .token.keyword.keyword-return, .token.keyword.keyword-copiere {
+        background: #EF4836;
+    }
+
+    .caption-thumb text-center {
+        color: white;
     }
 </style>
 
@@ -712,8 +314,6 @@
     window.onload = incarcareChart;
 
     function incarcareChart() {
-
-        /////////////////////////////////
         var k;
         var l;
         var final;

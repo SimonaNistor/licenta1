@@ -10,36 +10,37 @@
 <head>
     <script src='https://www.google.com/recaptcha/api.js'></script>
     @*<meta name=”description” content=”The most awesome landing page.”>*@
-<meta name=”title” content=”Licenta”>
-<meta name="description" content="App web">
-<meta name="keywords" content="Licenta, automatizare, AI, IA">
+    <meta name=”title” content=”Licenta”>
+    <meta name="description" content="App web">
+    <meta name="keywords" content="Licenta, automatizare, AI, IA">
+    <link href="~/css/prism.css" rel="stylesheet" />
 </head>
 
 
 
 
-    @*<div id="home" class="banner" style="">
-        <div class="overlay"></div>
-        <div class="curve"></div>
-        <div class="banner-caption">
+@*<div id="home" class="banner" style="">
+    <div class="overlay"></div>
+    <div class="curve"></div>
+    <div class="banner-caption">
 
-            <div class="container">
-                <div class="row">
-                    <div class="caption-inner text-center wow fadeInUp">
-                        <h1>INSTRUMENT PENTRU AUTOMATIZAREA CREARII DE SOFTWARE</h1>
-                    </div>
-                    <div class="caption-inner text-center wow fadeInUp"></div>
+        <div class="container">
+            <div class="row">
+                <div class="caption-inner text-center wow fadeInUp">
+                    <h1>INSTRUMENT PENTRU AUTOMATIZAREA CREARII DE SOFTWARE</h1>
                 </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-                        <div class="subscribe-content text-center">
-                            <form action="#" method="post" id="searchForm">
-                                <div class="input-group">
-                                    <input method="post" type="text" class="form-control ui" id="searchBar" placeholder="Keyword1@Keyword2" name="searchBar" />
-                                    <div class="help-block with-errors"></div>
-                                    <span class="input-group-addon">
-                                        @*<input class="btn btn-primary" value="SEARCH" onclick="search()">*@
-                                        @*<button onclick="search()" value="SEARCH" class="btn btn-primary ui submit button">Search</button>
+                <div class="caption-inner text-center wow fadeInUp"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+                    <div class="subscribe-content text-center">
+                        <form action="#" method="post" id="searchForm">
+                            <div class="input-group">
+                                <input method="post" type="text" class="form-control ui" id="searchBar" placeholder="Keyword1@Keyword2" name="searchBar" />
+                                <div class="help-block with-errors"></div>
+                                <span class="input-group-addon">
+                                    @*<input class="btn btn-primary" value="SEARCH" onclick="search()">*@
+@*<button onclick="search()" value="SEARCH" class="btn btn-primary ui submit button">Search</button>
                                     </span>
 
 
@@ -52,79 +53,79 @@
             </div>
         </div>
     </div>*@
-    <button onclick="closeTab()" value="BACK" class="btn btn-primary ui submit button">Go Back</button>
-    <div class="afisareCodContainer">
-        <div class="container">
-            <pre>
-            <code>
-            <p id="getResult"></p>
+<button onclick="closeTab()" value="BACK" class="btn btn-primary ui submit button">Go Back</button>
+<div class="afisareCodContainer">
+    <div class="container">
+        <pre class="line-numbers language-markup">@*line-numbers*@ 
+        <code class="language-cpp">
+        <p id="getResult"></p>
         </code>
         </pre>
-        </div>
     </div>
+</div>
 
-    <button onclick="closeTab()" value="BACK" class="btn btn-primary ui submit button">Go Back</button>
-
-
-
+<button onclick="closeTab()" value="BACK" class="btn btn-primary ui submit button">Go Back</button>
 
 
-    <div class="back-top">
-        <a href="#"><i class="fa fa-angle-up"></i></a>
-    </div>
 
 
-    <script src="~/js/jquery.js"></script>
-    <script src="~/js/bootstrap.min.js"></script>
-    <script src="~/js/jquery.easing.min.js"></script>
-    <script src="~/js/SmoothScroll.js"></script>
-    <script src="~/js/wow.js"></script>
-    <script src="~/js/waypoints.min.js"></script>
-    <script src="~/js/jquery.counterup.min.js"></script>
-    <script src="~/js/jquery.parallax-1.1.3.js"></script>
-    <script src="~/js/modernizr-2.8.3.min.js"></script>
-    <script src="~/js/jquery.resize.ex.js"></script>
-    <script src="~/js/waitforimages.js"></script>
-    <script src="~/js/jquery.carousel-3d.min.js"></script>
-    <script src="~/js/owl.carousel.min.js"></script>
-    <script src="~/js/jquery.mb.YTPlayer.min.js"></script>
-    <script type="text/javascript" src="https://maps.google.com/maps/api/js?js?sensor=false&key=AIzaSyDkpD0-hjaAUydUfLOlXKKqInB64EqyCBo"></script>
-    <script src="~/js/script.js"></script>
-    <script src="~/js/prism.js"></script>
-    <script src="~/js/languageIdentifier.js"></script>
-    <script src="~/js/require.js"></script>
+
+<div class="back-top">
+    <a href="#"><i class="fa fa-angle-up"></i></a>
+</div>
 
 
-    <script>
-        $(document).ready(function () {
-            initialize();
-        });
-        $(window).on("load", GetSearchResult);
+<script src="~/js/jquery.js"></script>
+<script src="~/js/bootstrap.min.js"></script>
+<script src="~/js/jquery.easing.min.js"></script>
+<script src="~/js/SmoothScroll.js"></script>
+<script src="~/js/wow.js"></script>
+<script src="~/js/waypoints.min.js"></script>
+<script src="~/js/jquery.counterup.min.js"></script>
+<script src="~/js/jquery.parallax-1.1.3.js"></script>
+<script src="~/js/modernizr-2.8.3.min.js"></script>
+<script src="~/js/jquery.resize.ex.js"></script>
+<script src="~/js/waitforimages.js"></script>
+<script src="~/js/jquery.carousel-3d.min.js"></script>
+<script src="~/js/owl.carousel.min.js"></script>
+<script src="~/js/jquery.mb.YTPlayer.min.js"></script>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?js?sensor=false&key=AIzaSyDkpD0-hjaAUydUfLOlXKKqInB64EqyCBo"></script>
+<script src="~/js/script.js"></script>
+<script src="~/js/prism.js"></script>
+<script src="~/js/languageIdentifier.js"></script>
+<script src="~/js/require.js"></script>
 
-        function GetSearchResult() {
-            alert("loaded");
-            $.ajax({
-                type: "GET",
-                url: '/admin/advancedsearch/loadResult',
-                data: {
-                }
-            }).success(function (data) {
-                $('#getResult').empty();
-                $('#getResult').text(data);
 
-            })
-        }
+<script>
+    $(document).ready(function () {
+        initialize();
+    });
+    $(window).on("load", GetSearchResult);
 
-        function closeTab() {
-            if (confirm("Close Tab?")) {
-                close();
+    function GetSearchResult() {
+        alert("loaded");
+        $.ajax({
+            type: "GET",
+            url: '/admin/advancedsearch/loadResult',
+            data: {
             }
+        }).success(function (data) {
+            $('#getResult').empty();
+            $('#getResult').text(data);
 
+        })
+    }
+
+    function closeTab() {
+        if (confirm("Close Tab?")) {
+            close();
         }
 
-
-
-    </script>
-    @section Scripts{
-        <script src="~/js/semantic.min.js"></script>
     }
+
+
+
+</script>
+@section Scripts{
+    <script src="~/js/semantic.min.js"></script>
+}

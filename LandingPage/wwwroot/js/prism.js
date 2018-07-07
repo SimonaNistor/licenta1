@@ -1,5 +1,5 @@
 /* PrismJS 1.15.0
-https://prismjs.com/download.html#themes=prism-vs&languages=markup+css+clike+javascript+c+cpp&plugins=line-highlight+line-numbers+toolbar+highlight-keywords+show-language+copy-to-clipboard */
+https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+c+cpp&plugins=line-highlight+line-numbers+toolbar+highlight-keywords+show-language+copy-to-clipboard */
 var _self = "undefined" != typeof window ? window : "undefined" != typeof WorkerGlobalScope && self instanceof WorkerGlobalScope ? self : {},
     Prism = function () {
         var e = /\blang(?:uage)?-([\w-]+)\b/i,
