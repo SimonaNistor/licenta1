@@ -26,7 +26,6 @@ namespace LandingPage.Areas.Admin.Controllers
             string y = Workflow.getLastSearchKeywords();
             List<int> n = new List<int>();
             n = HtmlParser.getStatsKeywords(y);
-            int res = 0;
             List<string> lista = new List<string>();
             for(int i=0;i<n.Count();i++)
             {

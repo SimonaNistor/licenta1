@@ -26,10 +26,8 @@ namespace LandingPage.Extensions
             List<string> numeClase = new List<string>();
             List<string> listaPosibilitati = new List<string>();
             listaPosibilitati.Add("class");
-
-            bool _class = false;
+            
             List<string> result = new List<string>();
-            string className = "";
 
             for (int i = 0; i < lista.Count(); i++)
             {
@@ -216,7 +214,7 @@ namespace LandingPage.Extensions
 
                                 }
                             }
-                            result.Add("/n");
+                            result.Add("");
                             break;
                         case "constructor cu parametri":
                             {
@@ -344,7 +342,7 @@ namespace LandingPage.Extensions
                             }
                         }
                     }
-                    result.Add("/n");
+                    result.Add("");
                     break;
                 case "operator":
                     switch (specific)
