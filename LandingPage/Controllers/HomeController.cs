@@ -56,7 +56,7 @@ namespace test.Controllers
             {
                 var response = recaptcha;
                 //secret that was generated in key value pair
-                string secret = "6LegpE8UAAAAAB00Vr6SIxde9cnqKfZrbbw3CA7y";
+                string secret = "6Leo1mMUAAAAAPbbpU3FvSSB8z-ZOv-9jqCGy4v4";
 
                 var client = new WebClient();
                 var reply =

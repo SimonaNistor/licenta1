@@ -40,23 +40,23 @@ namespace test
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddAuthentication().AddGoogle(googleOptions =>
-            {
-                googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
-                googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
-            });
+            //services.AddAuthentication().AddGoogle(googleOptions =>
+            //{
+            //    googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+            //    googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+            //});
 
-            var skipHTTPS = Configuration.GetValue<bool>("LocalTest:skipHTTPS");
+            //var skipHTTPS = Configuration.GetValue<bool>("LocalTest:skipHTTPS");
             // requires using Microsoft.AspNetCore.Mvc;
-            services.Configure<MvcOptions>(options =>
-            {
-                // Set LocalTest:skipHTTPS to true to skip SSL requrement in 
-                // debug mode. This is useful when not using Visual Studio.
-                if (Environment.IsDevelopment() && !skipHTTPS)
-                {
-                    options.Filters.Add(new RequireHttpsAttribute());
-                }
-            });
+            //services.Configure<MvcOptions>(options =>
+            //{
+            //    // Set LocalTest:skipHTTPS to true to skip SSL requrement in 
+            //    // debug mode. This is useful when not using Visual Studio.
+            //    if (Environment.IsDevelopment() && !skipHTTPS)
+            //    {
+            //        options.Filters.Add(new RequireHttpsAttribute());
+            //    }
+            //});
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();

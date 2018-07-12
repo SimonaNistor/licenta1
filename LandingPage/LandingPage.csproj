@@ -4,6 +4,7 @@
     <UserSecretsId>aspnet-test-B0852B69-6B73-4623-83FC-9766BDAD1BE5</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Properties\PublishProfiles\LandingPage20180712023017 - Web Deploy.pubxml" />
     <None Remove="Properties\PublishProfiles\Licenta2018Simona - FTP.pubxml" />
     <None Remove="Properties\PublishProfiles\Licenta2018Simona - Web Deploy.pubxml" />
     <None Remove="Properties\PublishProfiles\LicentaApp - Web Deploy.pubxml" />
