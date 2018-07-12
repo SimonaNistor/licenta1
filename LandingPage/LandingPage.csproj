@@ -4,6 +4,13 @@
     <UserSecretsId>aspnet-test-B0852B69-6B73-4623-83FC-9766BDAD1BE5</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Properties\PublishProfiles\Licenta2018Simona - FTP.pubxml" />
+    <None Remove="Properties\PublishProfiles\Licenta2018Simona - Web Deploy.pubxml" />
+    <None Remove="Properties\PublishProfiles\LicentaApp - Web Deploy.pubxml" />
+    <None Remove="Properties\PublishProfiles\LicentaSimona - FTP.pubxml" />
+    <None Remove="Properties\PublishProfiles\LicentaSimona - Web Deploy.pubxml" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Extensions\scrip1.py" />
   </ItemGroup>
   <ItemGroup>
@@ -25,6 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Products\" />
+    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="wwwroot\python\" />
     <Folder Include="wwwroot\siteimages\" />
   </ItemGroup>

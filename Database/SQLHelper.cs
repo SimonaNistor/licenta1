@@ -11,7 +11,8 @@ namespace Database
             get
             {
                 //return //"Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=LandingPage;Data Source=DESKTOP-34HVD4S";
-                return "Data Source=DESKTOP-34HVD4S;Initial Catalog=LandingPage;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                //return "Data Source=DESKTOP-34HVD4S;Initial Catalog=LandingPage;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                return "Server=tcp:srname.database.windows.net,1433;Initial Catalog=LandingPage;Persist Security Info=False;User ID=simona;Password=simoomisZ0;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;";
             }
         }
     }
