@@ -118,30 +118,41 @@ namespace LandingPage.Extensions
         public static List<string> editareCod(string link) //returneaza lista cu toate codurile din link
         {
             System.Net.WebClient wc = new System.Net.WebClient();
-            byte[] raw = wc.DownloadData(link);
-            string webData = System.Text.Encoding.UTF8.GetString(raw);
-            char[] delimiterChars = { '<', '>' };
-            string[] code = webData.Split(delimiterChars);
-            StringBuilder ceva = new StringBuilder();
-            int count = 0;
-            foreach (string cod in code)
-            {
-                count++;
-                ceva.AppendLine(code.ToString());
-            }
-            string x = "";
             List<string> result = new List<string>();
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int i = 0; i < count; i++)
+            result.Add("");
+            try
             {
-                if (code[i].ToString() == "pre class=\"prettyprint notranslate\"")
+                byte[] raw = wc.DownloadData(link);
+                string webData = System.Text.Encoding.UTF8.GetString(raw);
+                char[] delimiterChars = { '<', '>' };
+                string[] code = webData.Split(delimiterChars);
+                StringBuilder ceva = new StringBuilder();
+                int count = 0;
+                foreach (string cod in code)
                 {
-                    x = code[i + 1].ToString();
-                    x = replaceAll(x);
-                    result.Add(x.ToString());
+                    count++;
+                    ceva.AppendLine(code.ToString());
                 }
+                string x = "";
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int i = 0; i < count; i++)
+                {
+                    if (code[i].ToString() == "pre class=\"prettyprint notranslate\"")
+                    {
+                        x = code[i + 1].ToString();
+                        x = replaceAll(x);
+                        result.Add(x.ToString());
+                    }
+                }
+                return result;
             }
-            return result;
+            catch (Exception)
+            {
+
+                //throw ex;
+                return result;
+            }
+            
         }
 
         public static string replaceAll(string x)
